@@ -8,9 +8,15 @@ Persian RTL subscription page templates for 3x-ui. Dark glass design, Happ & Inc
 
 | Template | Preview |
 |----------|---------|
-| [glass-dark](templates/glass-dark) | ![desktop](templates/glass-dark/desktop.png) |
+| [glass-dark](templates/glass-dark) | ![desktop](templates/glass-dark/desktop.jpg) |
 
-<p align="center"><img src="templates/glass-dark/mobile.png" width="280" alt="mobile preview"></p>
+<p align="center">
+  <img src="templates/glass-dark/mobile01.jpg" width="180" alt="mobile 1">
+  <img src="templates/glass-dark/mobile02.jpg" width="180" alt="mobile 2">
+  <img src="templates/glass-dark/mobile03.jpg" width="180" alt="mobile 3">
+  <img src="templates/glass-dark/mobile04.jpg" width="180" alt="mobile 4">
+  <img src="templates/glass-dark/mobile05.jpg" width="180" alt="mobile 5">
+</p>
 
 ## Features
 
