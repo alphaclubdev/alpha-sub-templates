@@ -347,24 +347,53 @@ body.light-theme .progress-track {
 .lang-item:hover{background:rgba(139,92,246,.14);color:var(--white)}
 .lang-item.active{background:rgba(79,70,229,.18);color:var(--white);font-weight:700}
 .lang-item.active::after{content:'\2713';color:var(--violet)}
+.flag{width:22px;height:15px;border-radius:3px;overflow:hidden;display:inline-block;flex:none;box-shadow:0 0 0 1px var(--border)}
+.flag svg{display:block;width:100%;height:100%}
+.lang-item{justify-content:flex-start}
 html[dir="ltr"] .config-name{text-align:left}
+
+
+  /* Inline SVG icon system — consistent with the original template */
+  .ui-svg{width:1.15em;height:1.15em;flex:none;display:inline-block;vertical-align:middle;stroke:currentColor}
+  .username-icon .ui-svg{width:20px;height:20px}
+  .stat-icon .ui-svg{width:24px;height:24px}
+  .expire-icon .ui-svg{width:19px;height:19px}
+  .btn-icon .ui-svg{width:19px;height:19px}
+  .config-btn .ui-svg{width:16px;height:16px}
+  .platform-acc-icon .ui-svg{width:22px;height:22px}
+  .app-icon .ui-svg{width:16px;height:16px}
+  .app-row-head .app-icon .ui-svg{width:22px;height:22px}
+  .support-icon-wrap .ui-svg{width:30px;height:30px}
+  .footer-badge .ui-svg{width:15px;height:15px}
+  .qr-modal-title .ui-svg{width:20px;height:20px}
+  .alert-icon .ui-svg{width:20px;height:20px}
+  .theme-toggle .ui-svg{width:20px;height:20px}
+  .app-icon{display:inline-flex;align-items:center;justify-content:center}
+  .app-row-head .app-icon{width:28px;height:28px;border-radius:9px;background:linear-gradient(135deg,var(--indigo),var(--purple));color:#fff}
+  .app-chip .app-icon{width:16px;height:16px;color:currentColor}
+  .theme-toggle .i-sun{display:none}
+  body.light-theme .theme-toggle .i-sun{display:inline-block}
+  body.light-theme .theme-toggle .i-moon{display:none}
+
+
+  .toast .ui-svg{width:16px;height:16px;vertical-align:-3px;margin-inline-end:5px}
 
 </style>
 </head>
 <body>
 
-<button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="تغییر تم" data-i18n-aria="themeAria">🌙</button>
+<button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="تغییر تم" data-i18n-aria="themeAria"><svg class="ui-svg i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ui-svg i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg></button>
 
 <div class="lang-wrap" id="lang-wrap">
-  <button class="lang-toggle" id="lang-toggle" onclick="toggleLangMenu(event)" aria-label="تغییر زبان" data-i18n-aria="langAria" aria-haspopup="true" aria-expanded="false">🌐</button>
-  <div class="lang-menu" id="lang-menu" role="menu">
-    <button type="button" class="lang-item" data-lang="fa" role="menuitem" onclick="selectLang('fa')">فارسی</button>
-    <button type="button" class="lang-item" data-lang="tr" role="menuitem" onclick="selectLang('tr')">Türkçe</button>
-    <button type="button" class="lang-item" data-lang="ar" role="menuitem" onclick="selectLang('ar')">العربية</button>
-    <button type="button" class="lang-item" data-lang="ru" role="menuitem" onclick="selectLang('ru')">Русский</button>
-    <button type="button" class="lang-item" data-lang="en" role="menuitem" onclick="selectLang('en')">English</button>
-  </div>
-</div>
+        <button class="lang-toggle" id="lang-toggle" onclick="toggleLangMenu(event)" aria-label="تغییر زبان" data-i18n-aria="langAria" aria-haspopup="true" aria-expanded="false"><span class="flag" id="lang-flag"></span></button>
+        <div class="lang-menu" id="lang-menu" role="menu">
+          <button type="button" class="lang-item" data-lang="fa" role="menuitem" onclick="selectLang('fa')"><span class="flag"><svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#fff"/><rect width="24" height="5.4" fill="#239F40"/><rect y="10.6" width="24" height="5.4" fill="#DA0000"/><circle cx="12" cy="8" r="2" fill="none" stroke="#DA0000" stroke-width="1"/></svg></span>فارسی</button>
+          <button type="button" class="lang-item" data-lang="tr" role="menuitem" onclick="selectLang('tr')"><span class="flag"><svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#E30A17"/><circle cx="9" cy="8" r="4" fill="#fff"/><circle cx="10.2" cy="8" r="3.2" fill="#E30A17"/><path d="M15 6.3l.4 1.2h1.3l-1.05.75.4 1.25L15 8.75 13.95 9.5l.4-1.25L13.3 7.5h1.3z" fill="#fff"/></svg></span>Türkçe</button>
+          <button type="button" class="lang-item" data-lang="ar" role="menuitem" onclick="selectLang('ar')"><span class="flag"><svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="5.4" fill="#00732F"/><rect y="5.3" width="24" height="5.4" fill="#fff"/><rect y="10.6" width="24" height="5.4" fill="#000"/><rect width="6.5" height="16" fill="#F00"/></svg></span>العربية</button>
+          <button type="button" class="lang-item" data-lang="ru" role="menuitem" onclick="selectLang('ru')"><span class="flag"><svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#fff"/><rect y="5.3" width="24" height="5.4" fill="#0039A6"/><rect y="10.6" width="24" height="5.4" fill="#D52B1E"/></svg></span>Русский</button>
+          <button type="button" class="lang-item" data-lang="en" role="menuitem" onclick="selectLang('en')"><span class="flag"><svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#012169"/><path d="M0 0l24 16M24 0L0 16" stroke="#fff" stroke-width="3"/><path d="M0 0l24 16M24 0L0 16" stroke="#C8102E" stroke-width="1.2"/><path d="M12 0v16M0 8h24" stroke="#fff" stroke-width="5"/><path d="M12 0v16M0 8h24" stroke="#C8102E" stroke-width="3"/></svg></span>English</button>
+        </div>
+      </div>
 
 <div id="bg-canvas">
   <div class="orb orb-1"></div>
@@ -376,7 +405,7 @@ html[dir="ltr"] .config-name{text-align:left}
 <!-- QR Modal -->
 <div class="qr-modal" id="qr-modal" onclick="closeQrModal(event)">
   <div class="qr-modal-inner">
-    <div class="qr-modal-title">📱 <span data-i18n="qrModalTitle">اسکن QR Code</span></div>
+    <div class="qr-modal-title"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h3M20 17v4"/></svg> <span data-i18n="qrModalTitle">اسکن QR Code</span></div>
     <div id="modal-qr-box"></div>
     <button class="qr-modal-close" onclick="document.getElementById('qr-modal').classList.remove('show')" data-i18n="close">بستن</button>
   </div>
@@ -418,14 +447,14 @@ html[dir="ltr"] .config-name{text-align:left}
 
       <!-- STATUS ALERT — filled by JS (expired / exhausted / low / disabled) -->
       <div class="alert-banner" id="alert-banner" style="display:none" role="alert">
-        <span class="alert-icon" id="alert-icon">⚠️</span>
+        <span class="alert-icon" id="alert-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3 2 21h20z"/><path d="M12 10v5M12 18v.01"/></svg></span>
         <span class="alert-text" id="alert-text"></span>
         {{ if .subSupportUrl }}<a href="{{ .subSupportUrl }}" class="alert-btn" target="_blank" rel="noopener" data-i18n="renewSupport">تمدید / پشتیبانی</a>{{ end }}
       </div>
 
       <!-- USERNAME ROW (first item) -->
       <div class="username-row">
-        <span class="username-icon">👤</span>
+        <span class="username-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span>
         <span class="username-label" data-i18n="username">نام کاربری</span>
         <span class="username-val" id="username-display">
 		{{ if gt (len .emails) 0 }}
@@ -438,22 +467,22 @@ html[dir="ltr"] .config-name{text-align:left}
 
       <div class="stats-grid">
         <div class="stat-item">
-          <div class="stat-icon">🔋</div>
+          <div class="stat-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2" y="7" width="18" height="10" rx="2"/><path d="M22 11v2M6 10v4M10 10v4M14 10v4"/></svg></div>
           <div class="stat-label" data-i18n="remained">باقی‌مانده</div>
           <div class="stat-val" id="s-remained">{{ .remained }}</div>
         </div>
         <div class="stat-item">
-          <div class="stat-icon">📊</div>
+          <div class="stat-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h3M20 17v4"/></svg></div>
           <div class="stat-label" data-i18n="used">مصرف‌شده</div>
           <div class="stat-val" id="s-used">{{ .used }}</div>
         </div>
         <div class="stat-item">
-          <div class="stat-icon">⬇️</div>
+          <div class="stat-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 4v12M7 11l5 5 5-5M4 21h16"/></svg></div>
           <div class="stat-label" data-i18n="download">دانلود</div>
           <div class="stat-val" id="s-down">{{ .download }}</div>
         </div>
         <div class="stat-item">
-          <div class="stat-icon">⬆️</div>
+          <div class="stat-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 20V8M7 13l5-5 5 5M4 3h16"/></svg></div>
           <div class="stat-label" data-i18n="upload">آپلود</div>
           <div class="stat-val" id="s-up">{{ .upload }}</div>
         </div>
@@ -475,7 +504,7 @@ html[dir="ltr"] .config-name{text-align:left}
 
       <!-- EXPIRE ROW — JS converts unix timestamp to Shamsi -->
       <div class="expire-row">
-        <span class="expire-icon">⏰</span>
+        <span class="expire-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
         <span class="expire-text" data-i18n="expireDate">تاریخ انقضا</span>
         <span class="expire-val" id="expire-shamsi" data-ts="{{ .expire }}">{{ .expire }}</span>
         <span class="expire-countdown" id="expire-countdown"></span>
@@ -483,7 +512,7 @@ html[dir="ltr"] .config-name{text-align:left}
 
       <!-- LAST ONLINE — JS converts the timestamp (ms) to Shamsi -->
       <div class="expire-row">
-        <span class="expire-icon">🕒</span>
+        <span class="expire-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
         <span class="expire-text" data-i18n="lastOnline">آخرین اتصال</span>
         <span class="expire-val" id="lastonline-val" data-ts="{{ .lastOnline }}" data-online="{{ .isOnline }}">—</span>
         <span class="expire-countdown online" id="lastonline-badge" style="display:none" data-i18n="online">آنلاین</span>
@@ -497,13 +526,13 @@ html[dir="ltr"] .config-name{text-align:left}
       <div class="section-title" data-i18n="secActions">عملیات سریع</div>
       <div class="actions-grid">
         <button class="action-btn" onclick="copyLink('{{ .subUrl }}','toastCopySub',this)">
-          <span class="btn-icon">🔗</span><span data-i18n="copySub">کپی لینک اشتراک</span>
+          <span class="btn-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg></span><span data-i18n="copySub">کپی لینک اشتراک</span>
         </button>
         <button class="action-btn" onclick="copyLink('{{ .subClashUrl }}','toastCopyClash',this)">
-          <span class="btn-icon">⚡</span><span data-i18n="copyClash">کپی لینک Clash</span>
+          <span class="btn-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span><span data-i18n="copyClash">کپی لینک Clash</span>
         </button>
         <button class="action-btn" onclick="copyLink('{{ .subJsonUrl }}','toastCopyJson',this)">
-          <span class="btn-icon">📋</span><span data-i18n="copyJson">کپی لینک JSON</span>
+          <span class="btn-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></span><span data-i18n="copyJson">کپی لینک JSON</span>
         </button>
       </div>
     </div>
@@ -532,9 +561,9 @@ html[dir="ltr"] .config-name{text-align:left}
             <span class="config-protocol-badge">CFG</span>
             <span class="config-name">{{ . }}</span>
             <div class="config-actions">
-              <button class="config-btn" title="کپی" data-i18n-title="titleCopy" onclick="event.stopPropagation();copyLink(this.closest('.config-item').dataset.link,'toastCopyCfg',this)">📋</button>
-              <button class="config-btn" title="QR" data-i18n-title="titleQr" onclick="event.stopPropagation();showQrModal(this.closest('.config-item').dataset.link)">📱</button>
-              <button class="config-btn" title="باز" data-i18n-title="titleOpen" onclick="event.stopPropagation();window.open(this.closest('.config-item').dataset.link,'_blank')">↗</button>
+              <button class="config-btn" title="کپی" data-i18n-title="titleCopy" onclick="event.stopPropagation();copyLink(this.closest('.config-item').dataset.link,'toastCopyCfg',this)"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button>
+              <button class="config-btn" title="QR" data-i18n-title="titleQr" onclick="event.stopPropagation();showQrModal(this.closest('.config-item').dataset.link)"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h3M20 17v4"/></svg></button>
+              <button class="config-btn" title="باز" data-i18n-title="titleOpen" onclick="event.stopPropagation();window.open(this.closest('.config-item').dataset.link,'_blank')"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 17 17 7M8 7h9v9"/></svg></button>
             </div>
             <span class="config-chevron">▼</span>
           </div>
@@ -554,7 +583,7 @@ html[dir="ltr"] .config-name{text-align:left}
 
       <div class="platform-accordion" id="acc-android">
         <div class="platform-accordion-header" onclick="toggleAcc('acc-android')">
-          <span class="platform-acc-icon">🤖</span>
+          <span class="platform-acc-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg></span>
           <span class="platform-acc-name" data-i18n="android">اندروید</span>
           <span class="platform-acc-count" data-i18n="apps2">۲ نرم‌افزار</span>
           <span class="platform-acc-chevron">▼</span>
@@ -562,19 +591,19 @@ html[dir="ltr"] .config-name{text-align:left}
         <div class="platform-accordion-body">
           <div class="platform-accordion-inner">
           <div class="app-row">
-            <div class="app-row-head"><span class="app-icon">🔰</span>Happ</div>
+            <div class="app-row-head"><span class="app-icon"><svg class="ui-svg app-monogram" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 7v10M16 7v10M8 12h8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>Happ</div>
             <div class="app-row-actions">
-              <a href="https://play.google.com/store/apps/details?id=com.happproxy" class="app-chip" target="_blank" rel="noopener"><span class="app-icon">▶️</span>Google Play</a>
-              <a href="https://github.com/Happ-proxy/happ-android/releases/latest/download/Happ.apk" class="app-chip" target="_blank" rel="noopener"><span class="app-icon">📦</span><span data-i18n="dlApk">دانلود APK</span></a>
-              <a href="happ://add/{{ .subUrl }}" class="app-chip add" onclick="showToast(t('openingApp'))"><span class="app-icon">⚡</span><span data-i18n="autoAdd">افزودن خودکار</span></a>
+              <a href="https://play.google.com/store/apps/details?id=com.happproxy" class="app-chip" target="_blank" rel="noopener"><span class="app-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 13 8-13 8z"/></svg></span>Google Play</a>
+              <a href="https://github.com/Happ-proxy/happ-android/releases/latest/download/Happ.apk" class="app-chip" target="_blank" rel="noopener"><span class="app-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 3 9 5v8l-9 5-9-5V8zM3 8l9 5 9-5M12 13v8"/></svg></span><span data-i18n="dlApk">دانلود APK</span></a>
+              <a href="happ://add/{{ .subUrl }}" class="app-chip add" onclick="showToast(t('openingApp'))"><span class="app-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span><span data-i18n="autoAdd">افزودن خودکار</span></a>
             </div>
           </div>
           <div class="app-row">
-            <div class="app-row-head"><span class="app-icon">💎</span>Incy</div>
+            <div class="app-row-head"><span class="app-icon"><svg class="ui-svg app-monogram" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5 21 7v10l-9 4.5L3 17V7z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m8 15 4-7 4 7M9.5 12.5h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>Incy</div>
             <div class="app-row-actions">
-              <a href="https://play.google.com/store/apps/details?id=llc.itdev.incy" class="app-chip" target="_blank" rel="noopener"><span class="app-icon">▶️</span>Google Play</a>
-              <a href="https://github.com/INCY-DEV/incy-platforms/releases/latest/download/Incy.apk" class="app-chip" target="_blank" rel="noopener"><span class="app-icon">📦</span><span data-i18n="dlApk">دانلود APK</span></a>
-              <a href="incy://add/{{ .subUrl }}" class="app-chip add" onclick="showToast(t('openingApp'))"><span class="app-icon">⚡</span><span data-i18n="autoAdd">افزودن خودکار</span></a>
+              <a href="https://play.google.com/store/apps/details?id=llc.itdev.incy" class="app-chip" target="_blank" rel="noopener"><span class="app-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 13 8-13 8z"/></svg></span>Google Play</a>
+              <a href="https://github.com/INCY-DEV/incy-platforms/releases/latest/download/Incy.apk" class="app-chip" target="_blank" rel="noopener"><span class="app-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 3 9 5v8l-9 5-9-5V8zM3 8l9 5 9-5M12 13v8"/></svg></span><span data-i18n="dlApk">دانلود APK</span></a>
+              <a href="incy://add/{{ .subUrl }}" class="app-chip add" onclick="showToast(t('openingApp'))"><span class="app-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span><span data-i18n="autoAdd">افزودن خودکار</span></a>
             </div>
           </div>
           </div>
@@ -583,7 +612,7 @@ html[dir="ltr"] .config-name{text-align:left}
 
       <div class="platform-accordion" id="acc-windows">
         <div class="platform-accordion-header" onclick="toggleAcc('acc-windows')">
-          <span class="platform-acc-icon">🖥️</span>
+          <span class="platform-acc-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span>
           <span class="platform-acc-name" data-i18n="windows">ویندوز</span>
           <span class="platform-acc-count" data-i18n="apps2">۲ نرم‌افزار</span>
           <span class="platform-acc-chevron">▼</span>
@@ -591,17 +620,17 @@ html[dir="ltr"] .config-name{text-align:left}
         <div class="platform-accordion-body">
           <div class="platform-accordion-inner">
           <div class="app-row">
-            <div class="app-row-head"><span class="app-icon">🔰</span>Happ</div>
+            <div class="app-row-head"><span class="app-icon"><svg class="ui-svg app-monogram" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 7v10M16 7v10M8 12h8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>Happ</div>
             <div class="app-row-actions">
-              <a href="https://github.com/Happ-proxy/happ-desktop/releases/latest/download/setup-Happ.x64.exe" class="app-chip" target="_blank" rel="noopener"><span class="app-icon">📥</span><span data-i18n="dlWin">دانلود نسخه ویندوز</span></a>
-              <a href="happ://add/{{ .subUrl }}" class="app-chip add" onclick="showToast(t('openingApp'))"><span class="app-icon">⚡</span><span data-i18n="autoAdd">افزودن خودکار</span></a>
+              <a href="https://github.com/Happ-proxy/happ-desktop/releases/latest/download/setup-Happ.x64.exe" class="app-chip" target="_blank" rel="noopener"><span class="app-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 4v12M7 11l5 5 5-5M4 21h16"/></svg></span><span data-i18n="dlWin">دانلود نسخه ویندوز</span></a>
+              <a href="happ://add/{{ .subUrl }}" class="app-chip add" onclick="showToast(t('openingApp'))"><span class="app-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span><span data-i18n="autoAdd">افزودن خودکار</span></a>
             </div>
           </div>
           <div class="app-row">
-            <div class="app-row-head"><span class="app-icon">💎</span>Incy</div>
+            <div class="app-row-head"><span class="app-icon"><svg class="ui-svg app-monogram" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5 21 7v10l-9 4.5L3 17V7z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m8 15 4-7 4 7M9.5 12.5h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>Incy</div>
             <div class="app-row-actions">
-              <a href="https://github.com/INCY-DEV/incy-platforms/releases/latest/download/incy-windows-setup.exe" class="app-chip" target="_blank" rel="noopener"><span class="app-icon">📥</span><span data-i18n="dlWin">دانلود نسخه ویندوز</span></a>
-              <a href="incy://add/{{ .subUrl }}" class="app-chip add" onclick="showToast(t('openingApp'))"><span class="app-icon">⚡</span><span data-i18n="autoAdd">افزودن خودکار</span></a>
+              <a href="https://github.com/INCY-DEV/incy-platforms/releases/latest/download/incy-windows-setup.exe" class="app-chip" target="_blank" rel="noopener"><span class="app-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 4v12M7 11l5 5 5-5M4 21h16"/></svg></span><span data-i18n="dlWin">دانلود نسخه ویندوز</span></a>
+              <a href="incy://add/{{ .subUrl }}" class="app-chip add" onclick="showToast(t('openingApp'))"><span class="app-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span><span data-i18n="autoAdd">افزودن خودکار</span></a>
             </div>
           </div>
           </div>
@@ -610,7 +639,7 @@ html[dir="ltr"] .config-name{text-align:left}
 
       <div class="platform-accordion" id="acc-mac">
         <div class="platform-accordion-header" onclick="toggleAcc('acc-mac')">
-          <span class="platform-acc-icon">🍏</span>
+          <span class="platform-acc-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="5" width="16" height="11" rx="2"/><path d="M2 20h20"/></svg></span>
           <span class="platform-acc-name" data-i18n="mac">مک</span>
           <span class="platform-acc-count" data-i18n="apps2">۲ نرم‌افزار</span>
           <span class="platform-acc-chevron">▼</span>
@@ -618,20 +647,20 @@ html[dir="ltr"] .config-name{text-align:left}
         <div class="platform-accordion-body">
           <div class="platform-accordion-inner">
           <div class="app-row">
-            <div class="app-row-head"><span class="app-icon">🔰</span>Happ</div>
+            <div class="app-row-head"><span class="app-icon"><svg class="ui-svg app-monogram" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 7v10M16 7v10M8 12h8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>Happ</div>
             <div class="app-row-actions">
-              <a href="https://apps.apple.com/us/app/happ-proxy-utility/id6504287215" class="app-chip" target="_blank" rel="noopener"><span class="app-icon">🍎</span>App Store</a>
-              <a href="https://github.com/Happ-proxy/happ-desktop/releases/latest/download/Happ.macOS.universal.dmg" class="app-chip" target="_blank" rel="noopener"><span class="app-icon">💿</span><span data-i18n="dlDmg">دانلود DMG</span></a>
-              <a href="happ://add/{{ .subUrl }}" class="app-chip add" onclick="showToast(t('openingApp'))"><span class="app-icon">⚡</span><span data-i18n="autoAdd">افزودن خودکار</span></a>
+              <a href="https://apps.apple.com/us/app/happ-proxy-utility/id6504287215" class="app-chip" target="_blank" rel="noopener"><span class="app-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M16.7 13.2c0-2.1 1.7-3.1 1.8-3.2-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.7.8-3.4.8-.7 0-1.8-.8-3-.8-1.6 0-3.1.9-3.9 2.3-1.7 2.9-.4 7.2 1.2 9.5.8 1.1 1.7 2.3 2.9 2.2 1.2 0 1.6-.7 3.1-.7s1.9.7 3.1.7c1.3 0 2.1-1.1 2.8-2.2.9-1.3 1.2-2.6 1.2-2.7-.1 0-2.6-1-2.6-4.2zM14.5 6.8c.7-.8 1.2-1.9 1-3-.9 0-2 .6-2.7 1.4-.6.7-1.2 1.8-1 2.9 1 .1 2-.5 2.7-1.3z"/></svg></span>App Store</a>
+              <a href="https://github.com/Happ-proxy/happ-desktop/releases/latest/download/Happ.macOS.universal.dmg" class="app-chip" target="_blank" rel="noopener"><span class="app-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 3 9 5v8l-9 5-9-5V8zM3 8l9 5 9-5M12 13v8"/></svg></span><span data-i18n="dlDmg">دانلود DMG</span></a>
+              <a href="happ://add/{{ .subUrl }}" class="app-chip add" onclick="showToast(t('openingApp'))"><span class="app-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span><span data-i18n="autoAdd">افزودن خودکار</span></a>
             </div>
           </div>
           <div class="app-row">
-            <div class="app-row-head"><span class="app-icon">💎</span>Incy</div>
+            <div class="app-row-head"><span class="app-icon"><svg class="ui-svg app-monogram" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5 21 7v10l-9 4.5L3 17V7z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m8 15 4-7 4 7M9.5 12.5h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>Incy</div>
             <div class="app-row-actions">
-              <a href="https://apps.apple.com/app/incy/id6756943388" class="app-chip" target="_blank" rel="noopener"><span class="app-icon">🍎</span>App Store</a>
-              <a href="https://github.com/INCY-DEV/incy-platforms/releases/latest/download/incy-macos-arm64.dmg" class="app-chip" target="_blank" rel="noopener"><span class="app-icon">💿</span>DMG (Apple Silicon)</a>
-              <a href="https://github.com/INCY-DEV/incy-platforms/releases/latest/download/incy-macos-intel.dmg" class="app-chip" target="_blank" rel="noopener"><span class="app-icon">💿</span>DMG (Intel)</a>
-              <a href="incy://add/{{ .subUrl }}" class="app-chip add" onclick="showToast(t('openingApp'))"><span class="app-icon">⚡</span><span data-i18n="autoAdd">افزودن خودکار</span></a>
+              <a href="https://apps.apple.com/app/incy/id6756943388" class="app-chip" target="_blank" rel="noopener"><span class="app-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M16.7 13.2c0-2.1 1.7-3.1 1.8-3.2-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.7.8-3.4.8-.7 0-1.8-.8-3-.8-1.6 0-3.1.9-3.9 2.3-1.7 2.9-.4 7.2 1.2 9.5.8 1.1 1.7 2.3 2.9 2.2 1.2 0 1.6-.7 3.1-.7s1.9.7 3.1.7c1.3 0 2.1-1.1 2.8-2.2.9-1.3 1.2-2.6 1.2-2.7-.1 0-2.6-1-2.6-4.2zM14.5 6.8c.7-.8 1.2-1.9 1-3-.9 0-2 .6-2.7 1.4-.6.7-1.2 1.8-1 2.9 1 .1 2-.5 2.7-1.3z"/></svg></span>App Store</a>
+              <a href="https://github.com/INCY-DEV/incy-platforms/releases/latest/download/incy-macos-arm64.dmg" class="app-chip" target="_blank" rel="noopener"><span class="app-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 3 9 5v8l-9 5-9-5V8zM3 8l9 5 9-5M12 13v8"/></svg></span>DMG (Apple Silicon)</a>
+              <a href="https://github.com/INCY-DEV/incy-platforms/releases/latest/download/incy-macos-intel.dmg" class="app-chip" target="_blank" rel="noopener"><span class="app-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 3 9 5v8l-9 5-9-5V8zM3 8l9 5 9-5M12 13v8"/></svg></span>DMG (Intel)</a>
+              <a href="incy://add/{{ .subUrl }}" class="app-chip add" onclick="showToast(t('openingApp'))"><span class="app-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span><span data-i18n="autoAdd">افزودن خودکار</span></a>
             </div>
           </div>
           </div>
@@ -640,7 +669,7 @@ html[dir="ltr"] .config-name{text-align:left}
 
       <div class="platform-accordion" id="acc-ios">
         <div class="platform-accordion-header" onclick="toggleAcc('acc-ios')">
-          <span class="platform-acc-icon">📱</span>
+          <span class="platform-acc-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg></span>
           <span class="platform-acc-name" data-i18n="iphone">آیفون</span>
           <span class="platform-acc-count" data-i18n="apps2">۲ نرم‌افزار</span>
           <span class="platform-acc-chevron">▼</span>
@@ -648,17 +677,17 @@ html[dir="ltr"] .config-name{text-align:left}
         <div class="platform-accordion-body">
           <div class="platform-accordion-inner">
           <div class="app-row">
-            <div class="app-row-head"><span class="app-icon">🔰</span>Happ</div>
+            <div class="app-row-head"><span class="app-icon"><svg class="ui-svg app-monogram" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 7v10M16 7v10M8 12h8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>Happ</div>
             <div class="app-row-actions">
-              <a href="https://apps.apple.com/us/app/happ-proxy-utility/id6504287215" class="app-chip" target="_blank" rel="noopener"><span class="app-icon">🍎</span>App Store</a>
-              <a href="happ://add/{{ .subUrl }}" class="app-chip add" onclick="showToast(t('openingApp'))"><span class="app-icon">⚡</span><span data-i18n="autoAdd">افزودن خودکار</span></a>
+              <a href="https://apps.apple.com/us/app/happ-proxy-utility/id6504287215" class="app-chip" target="_blank" rel="noopener"><span class="app-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M16.7 13.2c0-2.1 1.7-3.1 1.8-3.2-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.7.8-3.4.8-.7 0-1.8-.8-3-.8-1.6 0-3.1.9-3.9 2.3-1.7 2.9-.4 7.2 1.2 9.5.8 1.1 1.7 2.3 2.9 2.2 1.2 0 1.6-.7 3.1-.7s1.9.7 3.1.7c1.3 0 2.1-1.1 2.8-2.2.9-1.3 1.2-2.6 1.2-2.7-.1 0-2.6-1-2.6-4.2zM14.5 6.8c.7-.8 1.2-1.9 1-3-.9 0-2 .6-2.7 1.4-.6.7-1.2 1.8-1 2.9 1 .1 2-.5 2.7-1.3z"/></svg></span>App Store</a>
+              <a href="happ://add/{{ .subUrl }}" class="app-chip add" onclick="showToast(t('openingApp'))"><span class="app-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span><span data-i18n="autoAdd">افزودن خودکار</span></a>
             </div>
           </div>
           <div class="app-row">
-            <div class="app-row-head"><span class="app-icon">💎</span>Incy</div>
+            <div class="app-row-head"><span class="app-icon"><svg class="ui-svg app-monogram" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5 21 7v10l-9 4.5L3 17V7z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m8 15 4-7 4 7M9.5 12.5h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>Incy</div>
             <div class="app-row-actions">
-              <a href="https://apps.apple.com/app/incy/id6756943388" class="app-chip" target="_blank" rel="noopener"><span class="app-icon">🍎</span>App Store</a>
-              <a href="incy://add/{{ .subUrl }}" class="app-chip add" onclick="showToast(t('openingApp'))"><span class="app-icon">⚡</span><span data-i18n="autoAdd">افزودن خودکار</span></a>
+              <a href="https://apps.apple.com/app/incy/id6756943388" class="app-chip" target="_blank" rel="noopener"><span class="app-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M16.7 13.2c0-2.1 1.7-3.1 1.8-3.2-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.7.8-3.4.8-.7 0-1.8-.8-3-.8-1.6 0-3.1.9-3.9 2.3-1.7 2.9-.4 7.2 1.2 9.5.8 1.1 1.7 2.3 2.9 2.2 1.2 0 1.6-.7 3.1-.7s1.9.7 3.1.7c1.3 0 2.1-1.1 2.8-2.2.9-1.3 1.2-2.6 1.2-2.7-.1 0-2.6-1-2.6-4.2zM14.5 6.8c.7-.8 1.2-1.9 1-3-.9 0-2 .6-2.7 1.4-.6.7-1.2 1.8-1 2.9 1 .1 2-.5 2.7-1.3z"/></svg></span>App Store</a>
+              <a href="incy://add/{{ .subUrl }}" class="app-chip add" onclick="showToast(t('openingApp'))"><span class="app-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span><span data-i18n="autoAdd">افزودن خودکار</span></a>
             </div>
           </div>
           </div>
@@ -667,7 +696,7 @@ html[dir="ltr"] .config-name{text-align:left}
 
       <div class="platform-accordion" id="acc-tv" style="margin-bottom:0">
         <div class="platform-accordion-header" onclick="toggleAcc('acc-tv')">
-          <span class="platform-acc-icon">📺</span>
+          <span class="platform-acc-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="m8 2 4 4 4-4"/></svg></span>
           <span class="platform-acc-name">Android TV</span>
           <span class="platform-acc-count" data-i18n="apps2">۲ نرم‌افزار</span>
           <span class="platform-acc-chevron">▼</span>
@@ -675,15 +704,15 @@ html[dir="ltr"] .config-name{text-align:left}
         <div class="platform-accordion-body">
           <div class="platform-accordion-inner">
           <div class="app-row">
-            <div class="app-row-head"><span class="app-icon">🔰</span>Happ</div>
+            <div class="app-row-head"><span class="app-icon"><svg class="ui-svg app-monogram" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 7v10M16 7v10M8 12h8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>Happ</div>
             <div class="app-row-actions">
-              <a href="https://play.google.com/store/apps/details?id=com.happproxy" class="app-chip" target="_blank" rel="noopener"><span class="app-icon">▶️</span>Google Play</a>
+              <a href="https://play.google.com/store/apps/details?id=com.happproxy" class="app-chip" target="_blank" rel="noopener"><span class="app-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 13 8-13 8z"/></svg></span>Google Play</a>
             </div>
           </div>
           <div class="app-row">
-            <div class="app-row-head"><span class="app-icon">💎</span>Incy</div>
+            <div class="app-row-head"><span class="app-icon"><svg class="ui-svg app-monogram" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5 21 7v10l-9 4.5L3 17V7z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m8 15 4-7 4 7M9.5 12.5h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>Incy</div>
             <div class="app-row-actions">
-              <a href="https://play.google.com/store/apps/details?id=llc.itdev.incy" class="app-chip" target="_blank" rel="noopener"><span class="app-icon">▶️</span>Google Play</a>
+              <a href="https://play.google.com/store/apps/details?id=llc.itdev.incy" class="app-chip" target="_blank" rel="noopener"><span class="app-icon"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m7 4 13 8-13 8z"/></svg></span>Google Play</a>
             </div>
           </div>
           </div>
@@ -698,7 +727,7 @@ html[dir="ltr"] .config-name{text-align:left}
     <div class="glass support-card">
       <div class="section-title" data-i18n="secSupport">پشتیبانی</div>
       <div class="support-inner">
-        <div class="support-icon-wrap">💬</div>
+        <div class="support-icon-wrap"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 12a8 8 0 0 1-11.6 7.1L3 21l1.9-5.4A8 8 0 1 1 21 12z"/><path d="M8 12h.01M12 12h.01M16 12h.01"/></svg></div>
         <p class="support-text" data-i18n="supportText">در صورت بروز هرگونه مشکل، تیم پشتیبانی در کنار شماست.</p>
         <a href="{{ .subSupportUrl }}" class="support-btn" target="_blank">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 1.93.46 3.75 1.27 5.37L0 24l6.84-1.27A11.95 11.95 0 0 0 12 24c6.63 0 12-5.37 12-12S18.63 0 12 0zm6 16.5c-.26.7-1.32 1.3-1.82 1.37-.47.07-1.07.1-1.72-.11-.4-.13-.9-.3-1.56-.58-2.73-1.18-4.52-3.95-4.66-4.14-.13-.18-1.1-1.47-1.1-2.8 0-1.33.7-1.98 1-2.28.28-.3.6-.38.8-.38.2 0 .4.01.58.02.18.01.43-.07.67.51.26.6.88 2.15.96 2.3.08.16.13.35.03.56-.1.2-.16.32-.3.5-.14.17-.3.38-.43.51-.14.14-.28.3-.12.57.16.27.72 1.18 1.55 1.9 1.07.95 1.96 1.25 2.23 1.38.27.14.43.12.59-.07.16-.19.68-.8.87-1.07.18-.27.36-.22.6-.13.25.09 1.58.74 1.85.88.27.13.46.2.52.3.07.1.07.58-.18 1.27z"/></svg>
@@ -712,9 +741,9 @@ html[dir="ltr"] .config-name{text-align:left}
   <footer class="footer reveal" style="transition-delay:.35s">
     <div class="footer-divider"></div>
     <div class="footer-badges">
-      <div class="footer-badge">🔒 <span data-i18n="badgeSecure">سرویس امن و رمزنگاری‌شده</span></div>
-      <div class="footer-badge">🌐 <span data-i18n="badgeProto">پروتکل‌های استاندارد</span></div>
-      <div class="footer-badge">⚡ <span data-i18n="badgeFast">اتصال پرسرعت</span></div>
+      <div class="footer-badge"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/></svg> <span data-i18n="badgeSecure">سرویس امن و رمزنگاری‌شده</span></div>
+      <div class="footer-badge"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg> <span data-i18n="badgeProto">پروتکل‌های استاندارد</span></div>
+      <div class="footer-badge"><svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg> <span data-i18n="badgeFast">اتصال پرسرعت</span></div>
     </div>
     <div class="footer-brand">{{ .subTitle }}</div>
     <div class="footer-copy">© {{ .subTitle }} — <span data-i18n="rights">تمامی حقوق محفوظ است</span></div>
@@ -1002,6 +1031,8 @@ function applyLang(lang, persist) {
   document.querySelectorAll('.lang-item').forEach(function (b) {
     b.classList.toggle('active', b.getAttribute('data-lang') === lang);
   });
+  var fl=document.querySelector('.lang-item.active .flag'),tf=document.getElementById('lang-flag');
+  if(fl&&tf) tf.innerHTML=fl.innerHTML;
 
   var brand = document.querySelector('.hero-brand');
   document.title = (brand ? brand.textContent.trim() : '') + ' — ' + t('pageTitle');
@@ -1142,13 +1173,13 @@ window.addEventListener('DOMContentLoaded', function() {
     var exhausted = c.totB>0 && c.usedB>=c.totB;
     var lowData   = c.totB>0 && c.usedB/c.totB>=0.9;
     var lowTime   = c.expire>0 && !expired && (c.expire-now)<=3*86400;
-    var cls='active', txt=t('stActive'), msg='', kind='', icon='⚠️';
+    var cls='active', txt=t('stActive'), msg='', kind='';
     if(!c.enabled || expired || exhausted){
       cls='inactive'; kind='bad';
-      if(expired && exhausted){ txt=t('stExpiredNoData'); icon='⌛'; msg=t('msgExpiredNoData'); }
-      else if(expired){ txt=t('expiredWord'); icon='⌛'; msg=t('msgExpired'); }
-      else if(exhausted){ txt=t('stNoData'); icon='📉'; msg=t('msgNoData'); }
-      else { txt=t('stDisabled'); icon='⛔'; msg=t('msgDisabled'); }
+      if(expired && exhausted){ txt=t('stExpiredNoData'); msg=t('msgExpiredNoData'); }
+      else if(expired){ txt=t('expiredWord'); msg=t('msgExpired'); }
+      else if(exhausted){ txt=t('stNoData'); msg=t('msgNoData'); }
+      else { txt=t('stDisabled'); msg=t('msgDisabled'); }
     }
     else if(lowData || lowTime){
       cls='warn'; txt=t('stLow'); kind='warn';
@@ -1163,7 +1194,7 @@ window.addEventListener('DOMContentLoaded', function() {
         box.className='alert-banner '+kind;
         box.style.display='';
         document.getElementById('alert-text').textContent=msg;
-        document.getElementById('alert-icon').textContent=icon;
+        // Keep the static SVG warning icon intact.
       } else { box.style.display='none'; }
     }
   }
@@ -1274,7 +1305,13 @@ function showToast(msg,type){
   var c=document.getElementById('toast-container');
   var t=document.createElement('div');
   t.className='toast'+(type==='error'?' error':'');
-  t.innerHTML=(type==='success'?'✅':'❌')+' '+msg;
+  var icon=document.createElement('span');
+  icon.className='toast-icon';
+  icon.innerHTML=type==='success'
+    ? '<svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg>'
+    : '<svg class="ui-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>';
+  t.appendChild(icon);
+  t.appendChild(document.createTextNode(msg));
   c.appendChild(t);
   setTimeout(function(){t.classList.add('hide');setTimeout(function(){t.remove();},350);},2400);
 }
@@ -1354,7 +1391,7 @@ function toggleTheme() {
     body.classList.toggle('light-theme');
     
     var light = body.classList.contains('light-theme');
-    btn.textContent = light ? '☀️' : '🌙';
+    btn.setAttribute('aria-pressed', light ? 'true' : 'false');
     try { localStorage.setItem('theme', light ? 'light' : 'dark'); } catch (e) {}
 }
 
@@ -1364,7 +1401,7 @@ window.addEventListener('DOMContentLoaded', () => {
     try { saved = localStorage.getItem('theme'); } catch (e) {}
     if (saved === 'light') {
         document.body.classList.add('light-theme');
-        document.getElementById('theme-toggle').textContent = '☀️';
+        document.getElementById('theme-toggle').setAttribute('aria-pressed', 'true');
     }
 });
 
