@@ -1,6 +1,6 @@
 # alpha-sub-templates
 
-Persian RTL subscription page templates for 3x-ui. Dark glass design, Happ & Incy ready.
+Persian RTL subscription page templates for 3x-ui. Dark glass design, multi-language, Happ & Incy ready.
 
 [فارسی](#فارسی)
 
@@ -18,7 +18,8 @@ Persian RTL subscription page templates for 3x-ui. Dark glass design, Happ & Inc
 
 ## Features
 
-- Full Persian RTL layout, mobile-friendly
+- Multi-language with a built-in language switcher: Persian, Arabic, Turkish, Russian, English
+- Full RTL support (Persian, Arabic) and LTR layouts, mobile-friendly
 - Usage progress bar (used / remaining / total)
 - Expiry date in the Shamsi (Jalali) calendar
 - Last online time
@@ -29,6 +30,16 @@ Persian RTL subscription page templates for 3x-ui. Dark glass design, Happ & Inc
 - Setup guide for Happ and Incy (Android, iOS, Windows, macOS)
 - Support button linked to your panel's support URL
 - Uses only 3x-ui template variables, no hardcoded domains or links
+
+## Languages
+
+| Language | Code |
+|----------|------|
+| فارسی (Persian) | `fa` |
+| العربية (Arabic) | `ar` |
+| Türkçe (Turkish) | `tr` |
+| Русский (Russian) | `ru` |
+| English | `en` |
 
 ## Quick install
 
@@ -60,6 +71,11 @@ bash <(curl -Ls https://raw.githubusercontent.com/alphaclubdev/alpha-sub-templat
 
 Run the quick install command again. The previous file is saved as `index.html.bak`.
 
+## Changelog
+
+- **v1.1.0** — Added language switcher: Persian, Arabic, Turkish, Russian, English
+- **v1.0.0** — First release: glass-dark template
+
 ## Templates
 
 | Template | Folder |
@@ -70,17 +86,22 @@ Run the quick install command again. The previous file is saved as `index.html.b
 
 Issues and pull requests are welcome.
 
+## License
+
+[MIT](LICENSE)
+
 ---
 
 <a name="فارسی"></a>
 
 # فارسی
 
-قالب‌های فارسی راست‌چین صفحه‌ی اشتراک برای 3x-ui. طراحی شیشه‌ای تیره، آماده برای Happ و Incy.
+قالب‌های فارسی راست‌چین صفحه‌ی اشتراک برای 3x-ui. طراحی شیشه‌ای تیره، چندزبانه، آماده برای Happ و Incy.
 
 ## امکانات
 
-- چیدمان کامل فارسی و راست‌چین، سازگار با موبایل
+- چندزبانه با انتخابگر زبان داخلی: فارسی، عربی، ترکی استانبولی، روسی، انگلیسی
+- پشتیبانی کامل از راست‌چین (فارسی، عربی) و چپ‌چین، سازگار با موبایل
 - نوار مصرف (مصرف‌شده / باقی‌مانده / کل)
 - نمایش تاریخ انقضا به تقویم شمسی
 - زمان آخرین اتصال
@@ -91,6 +112,16 @@ Issues and pull requests are welcome.
 - راهنمای نصب Happ و Incy (اندروید، iOS، ویندوز، مک)
 - دکمه‌ی پشتیبانی متصل به لینک پشتیبانی پنل
 - فقط از متغیرهای قالب 3x-ui استفاده می‌کند، بدون دامنه و لینک ثابت
+
+## زبان‌ها
+
+| زبان | کد |
+|------|----|
+| فارسی | `fa` |
+| عربی | `ar` |
+| ترکی استانبولی | `tr` |
+| روسی | `ru` |
+| انگلیسی | `en` |
 
 ## نصب سریع
 
@@ -114,14 +145,23 @@ bash <(curl -Ls https://raw.githubusercontent.com/alphaclubdev/alpha-sub-templat
 
 ## نصب دستی
 
-۱. فایل `index.html` را از پوشه‌ی `templates/glass-dark` دانلود کن.
-۲. آن را در مسیر `/etc/3x-ui/sub_templates/glass-dark/` روی سرور آپلود کن (SFTP / scp).
-۳. مقدار **Sub Theme Directory** را در پنل مثل بالا تنظیم کن.
+1. فایل `index.html` را از پوشه‌ی `templates/glass-dark` دانلود کن.
+2. آن را در مسیر `/etc/3x-ui/sub_templates/glass-dark/` روی سرور آپلود کن (SFTP / scp).
+3. مقدار **Sub Theme Directory** را در پنل مثل بالا تنظیم کن.
 
 ## به‌روزرسانی
 
 دستور نصب سریع را دوباره اجرا کن. فایل قبلی با اسم `index.html.bak` نگه داشته می‌شود.
 
+## تاریخچه تغییرات
+
+- **v1.1.0** — اضافه شدن انتخابگر زبان: فارسی، عربی، ترکی استانبولی، روسی، انگلیسی
+- **v1.0.0** — اولین انتشار: قالب glass-dark
+
 ## مشارکت
 
 گزارش مشکل (Issue) و درخواست ادغام (Pull Request) پذیرفته می‌شود.
+
+## لایسنس
+
+[MIT](LICENSE)
