@@ -1,86 +1,180 @@
 # alpha-sub-templates
 
-Persian RTL subscription page templates for 3x-ui. Dark glass design, multi-language, Happ & Incy ready.
+Modern, multi-language subscription page templates for **3x-ui**. Built
+with a dark glass aesthetic, responsive layouts, and support for Happ
+and Incy.
 
 [فارسی](#فارسی)
 
+------------------------------------------------------------------------
+
 ## Preview
 
-![desktop](templates/glass-dark/Desktop.jpg)
-
+```{=html}
 <p align="center">
-  <img src="templates/glass-dark/Mobile01.jpg" width="180" alt="mobile 1">
-  <img src="templates/glass-dark/Mobile02.jpg" width="180" alt="mobile 2">
-  <img src="templates/glass-dark/Mobile03.jpg" width="180" alt="mobile 3">
-  <img src="templates/glass-dark/Mobile04.jpg" width="180" alt="mobile 4">
-  <img src="templates/glass-dark/Mobile05.jpg" width="180" alt="mobile 5">
+```
+`<img src="templates/glass-dark/Desktop.jpg" width="520" alt="Desktop preview of the glass-dark subscription template">`{=html}
+```{=html}
 </p>
-
+```
+```{=html}
+<details>
+```
+```{=html}
+<summary>
+```
+`<strong>`{=html}View mobile screenshots`</strong>`{=html}
+```{=html}
+</summary>
+```
+`<br>`{=html}
+```{=html}
+<table>
+```
+```{=html}
+<tr>
+```
+```{=html}
+<td align="center" width="50%">
+```
+`<img src="templates/glass-dark/Mobile01.jpg" width="230" alt="Mobile preview 1">`{=html}
+```{=html}
+</td>
+```
+```{=html}
+<td align="center" width="50%">
+```
+`<img src="templates/glass-dark/Mobile02.jpg" width="230" alt="Mobile preview 2">`{=html}
+```{=html}
+</td>
+```
+```{=html}
+</tr>
+```
+```{=html}
+<tr>
+```
+```{=html}
+<td align="center">
+```
+`<img src="templates/glass-dark/Mobile03.jpg" width="230" alt="Mobile preview 3">`{=html}
+```{=html}
+</td>
+```
+```{=html}
+<td align="center">
+```
+`<img src="templates/glass-dark/Mobile04.jpg" width="230" alt="Mobile preview 4">`{=html}
+```{=html}
+</td>
+```
+```{=html}
+</tr>
+```
+```{=html}
+<tr>
+```
+```{=html}
+<td align="center" colspan="2">
+```
+`<img src="templates/glass-dark/Mobile05.jpg" width="230" alt="Mobile preview 5">`{=html}
+```{=html}
+</td>
+```
+```{=html}
+</tr>
+```
+```{=html}
+</table>
+```
+```{=html}
+</details>
+```
 ## Features
 
-- Multi-language with a built-in language switcher: Persian, Arabic, Turkish, Russian, English
-- Full RTL support (Persian, Arabic) and LTR layouts, mobile-friendly
-- Usage progress bar (used / remaining / total)
-- Expiry date in the Shamsi (Jalali) calendar
-- Last online time
-- Status alerts: expired, data exhausted, disabled
-- One-tap copy for subscription, Clash and JSON links
-- QR code for the subscription link
-- Config list with copy and QR
-- Setup guide for Happ and Incy (Android, iOS, Windows, macOS)
-- Support button linked to your panel's support URL
-- Uses only 3x-ui template variables, no hardcoded domains or links
+-   Multi-language interface: Persian, Arabic, Turkish, Russian, and
+    English
+-   Full RTL support for Persian and Arabic, with LTR layouts for other
+    languages
+-   Responsive design for desktop and mobile
+-   Usage statistics and progress bar (used, remaining, and total data)
+-   Expiry date displayed in the Shamsi (Jalali) calendar
+-   Last online time
+-   Status alerts for expired, data-exhausted, or disabled accounts
+-   One-tap copy for subscription, Clash, and JSON links
+-   QR code for the subscription link
+-   Configuration list with copy and QR actions
+-   Setup guides for Happ and Incy on Android, iOS, Windows, and macOS
+-   Support button connected to the support URL configured in your panel
+-   Uses 3x-ui template variables; no hardcoded domains or subscription
+    links
 
-## Languages
+## Supported languages
 
-| Language | Code |
-|----------|------|
-| فارسی (Persian) | `fa` |
-| العربية (Arabic) | `ar` |
-| Türkçe (Turkish) | `tr` |
-| Русский (Russian) | `ru` |
-| English | `en` |
+  Language            Code
+  ------------------- ------
+  فارسی (Persian)     `fa`
+  العربية (Arabic)    `ar`
+  Türkçe (Turkish)    `tr`
+  Русский (Russian)   `ru`
+  English             `en`
 
-## Quick install
+## Installation
 
-Run on the server where 3x-ui is installed (as root):
+### Quick install
 
-```bash
+Run this command as `root` on the server where 3x-ui is installed:
+
+``` bash
 bash <(curl -Ls https://raw.githubusercontent.com/alphaclubdev/alpha-sub-templates/main/install.sh)
 ```
 
-Then in the 3x-ui panel:
+Then, in the 3x-ui panel:
 
-1. **Panel Settings** → **Subscription** → **Profile** tab
-2. **Sub Theme Directory:** `/etc/3x-ui/sub_templates/glass-dark/`
-3. Save, then open a subscription link.
+1.  Open **Panel Settings → Subscription → Profile**.
 
-The server needs access to GitHub. To install a specific template, pass its name:
+2.  Set **Sub Theme Directory** to:
 
-```bash
+    ``` text
+    /etc/3x-ui/sub_templates/glass-dark/
+    ```
+
+3.  Save the settings and open a subscription link.
+
+The server must be able to access GitHub. To install a specific
+template, append its folder name to the command:
+
+``` bash
 bash <(curl -Ls https://raw.githubusercontent.com/alphaclubdev/alpha-sub-templates/main/install.sh) glass-dark
 ```
 
-## Manual install
+### Manual install
 
-1. Download `index.html` from `templates/glass-dark`.
-2. Upload it to `/etc/3x-ui/sub_templates/glass-dark/` on your server (SFTP / scp).
-3. Set **Sub Theme Directory** in the panel as shown above.
+1.  Download `index.html` from
+    [`templates/glass-dark`](templates/glass-dark).
+2.  Upload it to `/etc/3x-ui/sub_templates/glass-dark/` on your server
+    using SFTP or `scp`.
+3.  Set **Sub Theme Directory** in the 3x-ui panel to the path shown
+    above.
 
-## Update
+### Update
 
-Run the quick install command again. The previous file is saved as `index.html.bak`.
+Run the quick-install command again. The installer keeps the previous
+file as `index.html.bak`.
 
 ## Changelog
 
-- **v1.1.0** — Added language switcher: Persian, Arabic, Turkish, Russian, English
-- **v1.0.0** — First release: glass-dark template
+-   **v1.1.1** --- Replaced emoji-based UI symbols with SVG icons and
+    refined the language selector with country flags.
+-   **v1.1.0** --- Added the language switcher: Persian, Arabic,
+    Turkish, Russian, and English.
+-   **v1.0.0** --- First release of the `glass-dark` template.
 
-## Templates
+## Available templates
 
-| Template | Folder |
-|----------|--------|
-| glass-dark | [templates/glass-dark](templates/glass-dark) |
+  Template     Directory
+  ------------ ------------------------------------------------
+  glass-dark   [`templates/glass-dark`](templates/glass-dark)
 
 ## Contributing
 
@@ -90,78 +184,185 @@ Issues and pull requests are welcome.
 
 [MIT](LICENSE)
 
----
+------------------------------------------------------------------------
 
-<a name="فارسی"></a>
+`<a name="فارسی">`{=html}`</a>`{=html}
 
 # فارسی
 
-قالب‌های فارسی راست‌چین صفحه‌ی اشتراک برای 3x-ui. طراحی شیشه‌ای تیره، چندزبانه، آماده برای Happ و Incy.
+قالب‌های مدرن و چندزبانه‌ی صفحه‌ی اشتراک برای **3x-ui**؛ با طراحی شیشه‌ای
+تیره، نمایش واکنش‌گرا و پشتیبانی از Happ و Incy.
 
+## پیش‌نمایش
+
+```{=html}
+<p align="center">
+```
+`<img src="templates/glass-dark/Desktop.jpg" width="520" alt="پیش‌نمایش دسکتاپ قالب glass-dark">`{=html}
+```{=html}
+</p>
+```
+```{=html}
+<details>
+```
+```{=html}
+<summary>
+```
+`<strong>`{=html}مشاهده تصاویر نسخه موبایل`</strong>`{=html}
+```{=html}
+</summary>
+```
+`<br>`{=html}
+```{=html}
+<table>
+```
+```{=html}
+<tr>
+```
+```{=html}
+<td align="center" width="50%">
+```
+`<img src="templates/glass-dark/Mobile01.jpg" width="230" alt="نمای موبایل ۱">`{=html}
+```{=html}
+</td>
+```
+```{=html}
+<td align="center" width="50%">
+```
+`<img src="templates/glass-dark/Mobile02.jpg" width="230" alt="نمای موبایل ۲">`{=html}
+```{=html}
+</td>
+```
+```{=html}
+</tr>
+```
+```{=html}
+<tr>
+```
+```{=html}
+<td align="center">
+```
+`<img src="templates/glass-dark/Mobile03.jpg" width="230" alt="نمای موبایل ۳">`{=html}
+```{=html}
+</td>
+```
+```{=html}
+<td align="center">
+```
+`<img src="templates/glass-dark/Mobile04.jpg" width="230" alt="نمای موبایل ۴">`{=html}
+```{=html}
+</td>
+```
+```{=html}
+</tr>
+```
+```{=html}
+<tr>
+```
+```{=html}
+<td align="center" colspan="2">
+```
+`<img src="templates/glass-dark/Mobile05.jpg" width="230" alt="نمای موبایل ۵">`{=html}
+```{=html}
+</td>
+```
+```{=html}
+</tr>
+```
+```{=html}
+</table>
+```
+```{=html}
+</details>
+```
 ## امکانات
 
-- چندزبانه با انتخابگر زبان داخلی: فارسی، عربی، ترکی استانبولی، روسی، انگلیسی
-- پشتیبانی کامل از راست‌چین (فارسی، عربی) و چپ‌چین، سازگار با موبایل
-- نوار مصرف (مصرف‌شده / باقی‌مانده / کل)
-- نمایش تاریخ انقضا به تقویم شمسی
-- زمان آخرین اتصال
-- هشدار وضعیت: منقضی، اتمام حجم، غیرفعال
-- کپی سریع لینک ساب، Clash و JSON
-- QR لینک اشتراک
-- لیست کانفیگ‌ها با کپی و QR
-- راهنمای نصب Happ و Incy (اندروید، iOS، ویندوز، مک)
-- دکمه‌ی پشتیبانی متصل به لینک پشتیبانی پنل
-- فقط از متغیرهای قالب 3x-ui استفاده می‌کند، بدون دامنه و لینک ثابت
+-   رابط کاربری چندزبانه: فارسی، عربی، ترکی استانبولی، روسی و انگلیسی
+-   پشتیبانی کامل از راست‌چین برای فارسی و عربی و چپ‌چین برای سایر زبان‌ها
+-   طراحی واکنش‌گرا برای موبایل و دسکتاپ
+-   نمایش آمار مصرف و نوار پیشرفت (مصرف‌شده، باقی‌مانده و حجم کل)
+-   نمایش تاریخ انقضا با تقویم شمسی
+-   نمایش آخرین زمان اتصال
+-   هشدار وضعیت برای اشتراک منقضی، اتمام حجم یا غیرفعال
+-   کپی سریع لینک اشتراک، Clash و JSON
+-   نمایش QR کد لینک اشتراک
+-   فهرست کانفیگ‌ها همراه با امکان کپی و نمایش QR
+-   راهنمای راه‌اندازی Happ و Incy برای اندروید، iOS، ویندوز و macOS
+-   دکمه پشتیبانی متصل به لینک پشتیبانی تنظیم‌شده در پنل
+-   استفاده از متغیرهای قالب 3x-ui، بدون دامنه یا لینک ثابت
 
-## زبان‌ها
+## زبان‌های پشتیبانی‌شده
 
-| زبان | کد |
-|------|----|
-| فارسی | `fa` |
-| عربی | `ar` |
-| ترکی استانبولی | `tr` |
-| روسی | `ru` |
-| انگلیسی | `en` |
+  زبان             کد
+  ---------------- ------
+  فارسی            `fa`
+  عربی             `ar`
+  ترکی استانبولی   `tr`
+  روسی             `ru`
+  انگلیسی          `en`
 
-## نصب سریع
+## نصب
 
-روی سروری که 3x-ui نصب است (با کاربر root) اجرا کن:
+### نصب سریع
 
-```bash
+این دستور را با دسترسی `root` روی سروری که 3x-ui نصب است اجرا کن:
+
+``` bash
 bash <(curl -Ls https://raw.githubusercontent.com/alphaclubdev/alpha-sub-templates/main/install.sh)
 ```
 
 سپس در پنل 3x-ui:
 
-1. **Panel Settings** ← **Subscription** ← تب **Profile**
-2. در **Sub Theme Directory** این آدرس را وارد کن: `/etc/3x-ui/sub_templates/glass-dark/`
-3. ذخیره کن و یک لینک ساب را باز کن.
+1.  وارد مسیر **Panel Settings → Subscription → Profile** شو.
 
-سرور باید به گیت‌هاب دسترسی داشته باشد. برای نصب یک قالب مشخص، اسمش را آخر دستور بنویس:
+2.  مقدار **Sub Theme Directory** را روی مسیر زیر قرار بده:
 
-```bash
+    ``` text
+    /etc/3x-ui/sub_templates/glass-dark/
+    ```
+
+3.  تنظیمات را ذخیره کن و یک لینک اشتراک را باز کن.
+
+سرور باید به GitHub دسترسی داشته باشد. برای نصب یک قالب مشخص، نام پوشه
+آن را به انتهای دستور اضافه کن:
+
+``` bash
 bash <(curl -Ls https://raw.githubusercontent.com/alphaclubdev/alpha-sub-templates/main/install.sh) glass-dark
 ```
 
-## نصب دستی
+### نصب دستی
 
-1. فایل `index.html` را از پوشه‌ی `templates/glass-dark` دانلود کن.
-2. آن را در مسیر `/etc/3x-ui/sub_templates/glass-dark/` روی سرور آپلود کن (SFTP / scp).
-3. مقدار **Sub Theme Directory** را در پنل مثل بالا تنظیم کن.
+1.  فایل `index.html` را از پوشه
+    [`templates/glass-dark`](templates/glass-dark) دانلود کن.
+2.  آن را با SFTP یا `scp` در مسیر
+    `/etc/3x-ui/sub_templates/glass-dark/` روی سرور قرار بده.
+3.  مقدار **Sub Theme Directory** را در پنل 3x-ui روی همین مسیر تنظیم
+    کن.
 
-## به‌روزرسانی
+### به‌روزرسانی
 
-دستور نصب سریع را دوباره اجرا کن. فایل قبلی با اسم `index.html.bak` نگه داشته می‌شود.
+دستور نصب سریع را دوباره اجرا کن. فایل قبلی با نام `index.html.bak`
+نگهداری می‌شود.
 
 ## تاریخچه تغییرات
 
-- **v1.1.0** — اضافه شدن انتخابگر زبان: فارسی، عربی، ترکی استانبولی، روسی، انگلیسی
-- **v1.0.0** — اولین انتشار: قالب glass-dark
+-   **v1.1.1** --- جایگزینی نمادهای ایموجی با آیکون‌های SVG و بهبود
+    انتخابگر زبان با پرچم کشورها.
+-   **v1.1.0** --- اضافه شدن انتخابگر زبان: فارسی، عربی، ترکی استانبولی،
+    روسی و انگلیسی.
+-   **v1.0.0** --- اولین انتشار قالب `glass-dark`.
+
+## قالب‌های موجود
+
+  قالب         مسیر
+  ------------ ------------------------------------------------
+  glass-dark   [`templates/glass-dark`](templates/glass-dark)
 
 ## مشارکت
 
-گزارش مشکل (Issue) و درخواست ادغام (Pull Request) پذیرفته می‌شود.
+برای گزارش مشکلات و ارسال درخواست‌های Pull Request خوشحال می‌شویم مشارکت
+کنی.
 
-## لایسنس
+## مجوز
 
 [MIT](LICENSE)
