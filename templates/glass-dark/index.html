@@ -101,7 +101,7 @@
 	}
 
     .username-val{
-    margin-right: auto;
+    margin-inline-start: auto;
     direction: ltr;
     color: var(--violet);
     font-size: clamp(20px, 2.5vw, 28px);
@@ -143,7 +143,7 @@
   .expire-row{display:flex;align-items:center;gap:10px;margin-top:20px;padding:14px 18px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:var(--radius-sm);flex-wrap:wrap}
   .expire-icon{font-size:18px;flex-shrink:0}
   .expire-text{font-size:13px;color:var(--dimmed)}
-  .expire-val{font-size:14px;font-weight:600;color:var(--muted);margin-right:auto}
+  .expire-val{font-size:14px;font-weight:600;color:var(--muted);margin-inline-start:auto}
   .expire-countdown{font-size:12px;color:var(--violet);font-weight:500;white-space:nowrap;padding:3px 10px;background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.25);border-radius:20px}
 
   .expire-countdown.online{color:var(--green);background:rgba(34,197,94,.12);border-color:rgba(34,197,94,.3)}
@@ -338,11 +338,33 @@ body.light-theme .progress-track {
     border: 1px solid #D1D5DB;
 }
 
+/* ───── انتخاب زبان ───── */
+.lang-wrap{position:fixed;top:20px;right:72px;z-index:1000}
+.lang-toggle{background:var(--glass-bg);border:1px solid var(--border);padding:10px;border-radius:50%;cursor:pointer;font-size:20px;transition:all .3s}
+.lang-menu{position:absolute;top:calc(100% + 10px);right:0;min-width:160px;direction:ltr;background:var(--bg-card2);border:1px solid var(--border);border-radius:14px;padding:6px;box-shadow:0 12px 40px rgba(0,0,0,.45);display:none;flex-direction:column;gap:2px;-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+.lang-menu.show{display:flex}
+.lang-item{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;padding:10px 14px;border:0;border-radius:10px;background:transparent;color:var(--muted);font-family:'Vazirmatn',sans-serif;font-size:14px;font-weight:500;text-align:left;cursor:pointer;transition:all var(--transition)}
+.lang-item:hover{background:rgba(139,92,246,.14);color:var(--white)}
+.lang-item.active{background:rgba(79,70,229,.18);color:var(--white);font-weight:700}
+.lang-item.active::after{content:'\2713';color:var(--violet)}
+html[dir="ltr"] .config-name{text-align:left}
+
 </style>
 </head>
 <body>
 
-<button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="تغییر تم">🌙</button>
+<button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="تغییر تم" data-i18n-aria="themeAria">🌙</button>
+
+<div class="lang-wrap" id="lang-wrap">
+  <button class="lang-toggle" id="lang-toggle" onclick="toggleLangMenu(event)" aria-label="تغییر زبان" data-i18n-aria="langAria" aria-haspopup="true" aria-expanded="false">🌐</button>
+  <div class="lang-menu" id="lang-menu" role="menu">
+    <button type="button" class="lang-item" data-lang="fa" role="menuitem" onclick="selectLang('fa')">فارسی</button>
+    <button type="button" class="lang-item" data-lang="tr" role="menuitem" onclick="selectLang('tr')">Türkçe</button>
+    <button type="button" class="lang-item" data-lang="ar" role="menuitem" onclick="selectLang('ar')">العربية</button>
+    <button type="button" class="lang-item" data-lang="ru" role="menuitem" onclick="selectLang('ru')">Русский</button>
+    <button type="button" class="lang-item" data-lang="en" role="menuitem" onclick="selectLang('en')">English</button>
+  </div>
+</div>
 
 <div id="bg-canvas">
   <div class="orb orb-1"></div>
@@ -354,9 +376,9 @@ body.light-theme .progress-track {
 <!-- QR Modal -->
 <div class="qr-modal" id="qr-modal" onclick="closeQrModal(event)">
   <div class="qr-modal-inner">
-    <div class="qr-modal-title">📱 اسکن QR Code</div>
+    <div class="qr-modal-title">📱 <span data-i18n="qrModalTitle">اسکن QR Code</span></div>
     <div id="modal-qr-box"></div>
-    <button class="qr-modal-close" onclick="document.getElementById('qr-modal').classList.remove('show')">بستن</button>
+    <button class="qr-modal-close" onclick="document.getElementById('qr-modal').classList.remove('show')" data-i18n="close">بستن</button>
   </div>
 </div>
 
@@ -372,20 +394,20 @@ body.light-theme .progress-track {
       </svg>
     </div>
     <div class="hero-brand">{{ .subTitle }}</div>
-    <h1 class="hero-title">مدیریت اشتراک و اطلاعات <span class="highlight">اتصال</span></h1>
-    <p class="hero-sub">اتصال سریع، پایدار و امن</p>
+    <h1 class="hero-title"><span data-i18n="heroTitle">مدیریت اشتراک و اطلاعات</span> <span class="highlight" data-i18n="heroHighlight">اتصال</span></h1>
+    <p class="hero-sub" data-i18n="heroSub">اتصال سریع، پایدار و امن</p>
     <div class="hero-divider"></div>
   </section>
 
   <!-- SUBSCRIPTION INFO -->
   <section class="section reveal" style="transition-delay:.1s">
     <div class="glass info-card">
-      <div class="section-title">اطلاعات اشتراک</div>
+      <div class="section-title" data-i18n="secInfo">اطلاعات اشتراک</div>
 
       <div class="info-header">
         <div class="info-title-area">
-          <div class="info-main-title">مصرف ترافیک</div>
-          <div class="info-subtitle">وضعیت لحظه‌ای اشتراک شما</div>
+          <div class="info-main-title" data-i18n="trafficUsage">مصرف ترافیک</div>
+          <div class="info-subtitle" data-i18n="liveStatus">وضعیت لحظه‌ای اشتراک شما</div>
         </div>
         {{ if .enabled }}
         <span class="status-badge active" id="status-badge" data-enabled="true"><span class="status-dot"></span>سرویس فعال</span>
@@ -398,13 +420,13 @@ body.light-theme .progress-track {
       <div class="alert-banner" id="alert-banner" style="display:none" role="alert">
         <span class="alert-icon" id="alert-icon">⚠️</span>
         <span class="alert-text" id="alert-text"></span>
-        {{ if .subSupportUrl }}<a href="{{ .subSupportUrl }}" class="alert-btn" target="_blank" rel="noopener">تمدید / پشتیبانی</a>{{ end }}
+        {{ if .subSupportUrl }}<a href="{{ .subSupportUrl }}" class="alert-btn" target="_blank" rel="noopener" data-i18n="renewSupport">تمدید / پشتیبانی</a>{{ end }}
       </div>
 
       <!-- USERNAME ROW (first item) -->
       <div class="username-row">
         <span class="username-icon">👤</span>
-        <span class="username-label">نام کاربری</span>
+        <span class="username-label" data-i18n="username">نام کاربری</span>
         <span class="username-val" id="username-display">
 		{{ if gt (len .emails) 0 }}
 		{{ index .emails 0 }}
@@ -417,22 +439,22 @@ body.light-theme .progress-track {
       <div class="stats-grid">
         <div class="stat-item">
           <div class="stat-icon">🔋</div>
-          <div class="stat-label">باقی‌مانده</div>
+          <div class="stat-label" data-i18n="remained">باقی‌مانده</div>
           <div class="stat-val" id="s-remained">{{ .remained }}</div>
         </div>
         <div class="stat-item">
           <div class="stat-icon">📊</div>
-          <div class="stat-label">مصرف‌شده</div>
+          <div class="stat-label" data-i18n="used">مصرف‌شده</div>
           <div class="stat-val" id="s-used">{{ .used }}</div>
         </div>
         <div class="stat-item">
           <div class="stat-icon">⬇️</div>
-          <div class="stat-label">دانلود</div>
+          <div class="stat-label" data-i18n="download">دانلود</div>
           <div class="stat-val" id="s-down">{{ .download }}</div>
         </div>
         <div class="stat-item">
           <div class="stat-icon">⬆️</div>
-          <div class="stat-label">آپلود</div>
+          <div class="stat-label" data-i18n="upload">آپلود</div>
           <div class="stat-val" id="s-up">{{ .upload }}</div>
         </div>
       </div>
@@ -440,7 +462,7 @@ body.light-theme .progress-track {
       <!-- PROGRESS BAR — JS reads exact byte counts and computes % -->
       <div class="progress-section">
         <div class="progress-label">
-          <span class="progress-label-text">میزان مصرف از حجم کل <strong style="color:var(--white)" id="s-total">{{ .total }}</strong></span>
+          <span class="progress-label-text"><span data-i18n="usageOf">میزان مصرف از حجم کل</span> <strong style="color:var(--white)" id="s-total">{{ .total }}</strong></span>
           <span class="progress-pct" id="progress-pct">—</span>
         </div>
         <div class="progress-track">
@@ -454,7 +476,7 @@ body.light-theme .progress-track {
       <!-- EXPIRE ROW — JS converts unix timestamp to Shamsi -->
       <div class="expire-row">
         <span class="expire-icon">⏰</span>
-        <span class="expire-text">تاریخ انقضا</span>
+        <span class="expire-text" data-i18n="expireDate">تاریخ انقضا</span>
         <span class="expire-val" id="expire-shamsi" data-ts="{{ .expire }}">{{ .expire }}</span>
         <span class="expire-countdown" id="expire-countdown"></span>
       </div>
@@ -462,9 +484,9 @@ body.light-theme .progress-track {
       <!-- LAST ONLINE — JS converts the timestamp (ms) to Shamsi -->
       <div class="expire-row">
         <span class="expire-icon">🕒</span>
-        <span class="expire-text">آخرین اتصال</span>
+        <span class="expire-text" data-i18n="lastOnline">آخرین اتصال</span>
         <span class="expire-val" id="lastonline-val" data-ts="{{ .lastOnline }}" data-online="{{ .isOnline }}">—</span>
-        <span class="expire-countdown online" id="lastonline-badge" style="display:none">آنلاین</span>
+        <span class="expire-countdown online" id="lastonline-badge" style="display:none" data-i18n="online">آنلاین</span>
       </div>
     </div>
   </section>
@@ -472,16 +494,16 @@ body.light-theme .progress-track {
   <!-- QUICK ACTIONS -->
   <section class="section reveal" style="transition-delay:.15s">
     <div class="glass actions-card">
-      <div class="section-title">عملیات سریع</div>
+      <div class="section-title" data-i18n="secActions">عملیات سریع</div>
       <div class="actions-grid">
-        <button class="action-btn" onclick="copyLink('{{ .subUrl }}','لینک اشتراک کپی شد',this)">
-          <span class="btn-icon">🔗</span>کپی لینک اشتراک
+        <button class="action-btn" onclick="copyLink('{{ .subUrl }}','toastCopySub',this)">
+          <span class="btn-icon">🔗</span><span data-i18n="copySub">کپی لینک اشتراک</span>
         </button>
-        <button class="action-btn" onclick="copyLink('{{ .subClashUrl }}','لینک Clash کپی شد',this)">
-          <span class="btn-icon">⚡</span>کپی لینک Clash
+        <button class="action-btn" onclick="copyLink('{{ .subClashUrl }}','toastCopyClash',this)">
+          <span class="btn-icon">⚡</span><span data-i18n="copyClash">کپی لینک Clash</span>
         </button>
-        <button class="action-btn" onclick="copyLink('{{ .subJsonUrl }}','لینک JSON کپی شد',this)">
-          <span class="btn-icon">📋</span>کپی لینک JSON
+        <button class="action-btn" onclick="copyLink('{{ .subJsonUrl }}','toastCopyJson',this)">
+          <span class="btn-icon">📋</span><span data-i18n="copyJson">کپی لینک JSON</span>
         </button>
       </div>
     </div>
@@ -490,19 +512,19 @@ body.light-theme .progress-track {
   <!-- QR CODE — right after quick actions -->
   <section class="section reveal" style="transition-delay:.18s">
     <div class="glass qrcode-card">
-      <div class="section-title" style="justify-content:center">QR Code اشتراک</div>
-      <p style="font-size:13px;color:var(--dimmed);text-align:center;margin-bottom:8px">برای اتصال سریع اسکن کنید</p>
+      <div class="section-title" style="justify-content:center" data-i18n="secQr">QR Code اشتراک</div>
+      <p style="font-size:13px;color:var(--dimmed);text-align:center;margin-bottom:8px" data-i18n="qrSub">برای اتصال سریع اسکن کنید</p>
       <div class="qr-frame">
         <div id="main-qrcode"></div>
       </div>
-      <p class="qr-hint">با هر اپلیکیشن پشتیبانی‌کننده اسکن کنید</p>
+      <p class="qr-hint" data-i18n="qrHint">با هر اپلیکیشن پشتیبانی‌کننده اسکن کنید</p>
     </div>
   </section>
 
   <!-- CONFIGS — right after QR -->
   <section class="section reveal" style="transition-delay:.2s">
     <div class="glass configs-card">
-      <div class="section-title">لیست کانفیگ‌ها</div>
+      <div class="section-title" data-i18n="secConfigs">لیست کانفیگ‌ها</div>
       <div class="config-list">
         {{ range .links }}
         <div class="config-item" data-link="{{ . }}">
@@ -510,9 +532,9 @@ body.light-theme .progress-track {
             <span class="config-protocol-badge">CFG</span>
             <span class="config-name">{{ . }}</span>
             <div class="config-actions">
-              <button class="config-btn" title="کپی" onclick="event.stopPropagation();copyLink(this.closest('.config-item').dataset.link,'کانفیگ کپی شد',this)">📋</button>
-              <button class="config-btn" title="QR" onclick="event.stopPropagation();showQrModal(this.closest('.config-item').dataset.link)">📱</button>
-              <button class="config-btn" title="باز" onclick="event.stopPropagation();window.open(this.closest('.config-item').dataset.link,'_blank')">↗</button>
+              <button class="config-btn" title="کپی" data-i18n-title="titleCopy" onclick="event.stopPropagation();copyLink(this.closest('.config-item').dataset.link,'toastCopyCfg',this)">📋</button>
+              <button class="config-btn" title="QR" data-i18n-title="titleQr" onclick="event.stopPropagation();showQrModal(this.closest('.config-item').dataset.link)">📱</button>
+              <button class="config-btn" title="باز" data-i18n-title="titleOpen" onclick="event.stopPropagation();window.open(this.closest('.config-item').dataset.link,'_blank')">↗</button>
             </div>
             <span class="config-chevron">▼</span>
           </div>
@@ -528,13 +550,13 @@ body.light-theme .progress-track {
   <!-- APPS ACCORDION -->
   <section class="section reveal" style="transition-delay:.25s">
     <div class="glass apps-card">
-      <div class="section-title">دانلود نرم‌افزارها</div>
+      <div class="section-title" data-i18n="secApps">دانلود نرم‌افزارها</div>
 
       <div class="platform-accordion" id="acc-android">
         <div class="platform-accordion-header" onclick="toggleAcc('acc-android')">
           <span class="platform-acc-icon">🤖</span>
-          <span class="platform-acc-name">اندروید</span>
-          <span class="platform-acc-count">۲ نرم‌افزار</span>
+          <span class="platform-acc-name" data-i18n="android">اندروید</span>
+          <span class="platform-acc-count" data-i18n="apps2">۲ نرم‌افزار</span>
           <span class="platform-acc-chevron">▼</span>
         </div>
         <div class="platform-accordion-body">
@@ -543,16 +565,16 @@ body.light-theme .progress-track {
             <div class="app-row-head"><span class="app-icon">🔰</span>Happ</div>
             <div class="app-row-actions">
               <a href="https://play.google.com/store/apps/details?id=com.happproxy" class="app-chip" target="_blank" rel="noopener"><span class="app-icon">▶️</span>Google Play</a>
-              <a href="https://github.com/Happ-proxy/happ-android/releases/latest/download/Happ.apk" class="app-chip" target="_blank" rel="noopener"><span class="app-icon">📦</span>دانلود APK</a>
-              <a href="happ://add/{{ .subUrl }}" class="app-chip add" onclick="showToast('در حال باز کردن اپ…')"><span class="app-icon">⚡</span>افزودن خودکار</a>
+              <a href="https://github.com/Happ-proxy/happ-android/releases/latest/download/Happ.apk" class="app-chip" target="_blank" rel="noopener"><span class="app-icon">📦</span><span data-i18n="dlApk">دانلود APK</span></a>
+              <a href="happ://add/{{ .subUrl }}" class="app-chip add" onclick="showToast(t('openingApp'))"><span class="app-icon">⚡</span><span data-i18n="autoAdd">افزودن خودکار</span></a>
             </div>
           </div>
           <div class="app-row">
             <div class="app-row-head"><span class="app-icon">💎</span>Incy</div>
             <div class="app-row-actions">
               <a href="https://play.google.com/store/apps/details?id=llc.itdev.incy" class="app-chip" target="_blank" rel="noopener"><span class="app-icon">▶️</span>Google Play</a>
-              <a href="https://github.com/INCY-DEV/incy-platforms/releases/latest/download/Incy.apk" class="app-chip" target="_blank" rel="noopener"><span class="app-icon">📦</span>دانلود APK</a>
-              <a href="incy://add/{{ .subUrl }}" class="app-chip add" onclick="showToast('در حال باز کردن اپ…')"><span class="app-icon">⚡</span>افزودن خودکار</a>
+              <a href="https://github.com/INCY-DEV/incy-platforms/releases/latest/download/Incy.apk" class="app-chip" target="_blank" rel="noopener"><span class="app-icon">📦</span><span data-i18n="dlApk">دانلود APK</span></a>
+              <a href="incy://add/{{ .subUrl }}" class="app-chip add" onclick="showToast(t('openingApp'))"><span class="app-icon">⚡</span><span data-i18n="autoAdd">افزودن خودکار</span></a>
             </div>
           </div>
           </div>
@@ -562,8 +584,8 @@ body.light-theme .progress-track {
       <div class="platform-accordion" id="acc-windows">
         <div class="platform-accordion-header" onclick="toggleAcc('acc-windows')">
           <span class="platform-acc-icon">🖥️</span>
-          <span class="platform-acc-name">ویندوز</span>
-          <span class="platform-acc-count">۲ نرم‌افزار</span>
+          <span class="platform-acc-name" data-i18n="windows">ویندوز</span>
+          <span class="platform-acc-count" data-i18n="apps2">۲ نرم‌افزار</span>
           <span class="platform-acc-chevron">▼</span>
         </div>
         <div class="platform-accordion-body">
@@ -571,15 +593,15 @@ body.light-theme .progress-track {
           <div class="app-row">
             <div class="app-row-head"><span class="app-icon">🔰</span>Happ</div>
             <div class="app-row-actions">
-              <a href="https://github.com/Happ-proxy/happ-desktop/releases/latest/download/setup-Happ.x64.exe" class="app-chip" target="_blank" rel="noopener"><span class="app-icon">📥</span>دانلود نسخه ویندوز</a>
-              <a href="happ://add/{{ .subUrl }}" class="app-chip add" onclick="showToast('در حال باز کردن اپ…')"><span class="app-icon">⚡</span>افزودن خودکار</a>
+              <a href="https://github.com/Happ-proxy/happ-desktop/releases/latest/download/setup-Happ.x64.exe" class="app-chip" target="_blank" rel="noopener"><span class="app-icon">📥</span><span data-i18n="dlWin">دانلود نسخه ویندوز</span></a>
+              <a href="happ://add/{{ .subUrl }}" class="app-chip add" onclick="showToast(t('openingApp'))"><span class="app-icon">⚡</span><span data-i18n="autoAdd">افزودن خودکار</span></a>
             </div>
           </div>
           <div class="app-row">
             <div class="app-row-head"><span class="app-icon">💎</span>Incy</div>
             <div class="app-row-actions">
-              <a href="https://github.com/INCY-DEV/incy-platforms/releases/latest/download/incy-windows-setup.exe" class="app-chip" target="_blank" rel="noopener"><span class="app-icon">📥</span>دانلود نسخه ویندوز</a>
-              <a href="incy://add/{{ .subUrl }}" class="app-chip add" onclick="showToast('در حال باز کردن اپ…')"><span class="app-icon">⚡</span>افزودن خودکار</a>
+              <a href="https://github.com/INCY-DEV/incy-platforms/releases/latest/download/incy-windows-setup.exe" class="app-chip" target="_blank" rel="noopener"><span class="app-icon">📥</span><span data-i18n="dlWin">دانلود نسخه ویندوز</span></a>
+              <a href="incy://add/{{ .subUrl }}" class="app-chip add" onclick="showToast(t('openingApp'))"><span class="app-icon">⚡</span><span data-i18n="autoAdd">افزودن خودکار</span></a>
             </div>
           </div>
           </div>
@@ -589,8 +611,8 @@ body.light-theme .progress-track {
       <div class="platform-accordion" id="acc-mac">
         <div class="platform-accordion-header" onclick="toggleAcc('acc-mac')">
           <span class="platform-acc-icon">🍏</span>
-          <span class="platform-acc-name">مک</span>
-          <span class="platform-acc-count">۲ نرم‌افزار</span>
+          <span class="platform-acc-name" data-i18n="mac">مک</span>
+          <span class="platform-acc-count" data-i18n="apps2">۲ نرم‌افزار</span>
           <span class="platform-acc-chevron">▼</span>
         </div>
         <div class="platform-accordion-body">
@@ -599,8 +621,8 @@ body.light-theme .progress-track {
             <div class="app-row-head"><span class="app-icon">🔰</span>Happ</div>
             <div class="app-row-actions">
               <a href="https://apps.apple.com/us/app/happ-proxy-utility/id6504287215" class="app-chip" target="_blank" rel="noopener"><span class="app-icon">🍎</span>App Store</a>
-              <a href="https://github.com/Happ-proxy/happ-desktop/releases/latest/download/Happ.macOS.universal.dmg" class="app-chip" target="_blank" rel="noopener"><span class="app-icon">💿</span>دانلود DMG</a>
-              <a href="happ://add/{{ .subUrl }}" class="app-chip add" onclick="showToast('در حال باز کردن اپ…')"><span class="app-icon">⚡</span>افزودن خودکار</a>
+              <a href="https://github.com/Happ-proxy/happ-desktop/releases/latest/download/Happ.macOS.universal.dmg" class="app-chip" target="_blank" rel="noopener"><span class="app-icon">💿</span><span data-i18n="dlDmg">دانلود DMG</span></a>
+              <a href="happ://add/{{ .subUrl }}" class="app-chip add" onclick="showToast(t('openingApp'))"><span class="app-icon">⚡</span><span data-i18n="autoAdd">افزودن خودکار</span></a>
             </div>
           </div>
           <div class="app-row">
@@ -609,7 +631,7 @@ body.light-theme .progress-track {
               <a href="https://apps.apple.com/app/incy/id6756943388" class="app-chip" target="_blank" rel="noopener"><span class="app-icon">🍎</span>App Store</a>
               <a href="https://github.com/INCY-DEV/incy-platforms/releases/latest/download/incy-macos-arm64.dmg" class="app-chip" target="_blank" rel="noopener"><span class="app-icon">💿</span>DMG (Apple Silicon)</a>
               <a href="https://github.com/INCY-DEV/incy-platforms/releases/latest/download/incy-macos-intel.dmg" class="app-chip" target="_blank" rel="noopener"><span class="app-icon">💿</span>DMG (Intel)</a>
-              <a href="incy://add/{{ .subUrl }}" class="app-chip add" onclick="showToast('در حال باز کردن اپ…')"><span class="app-icon">⚡</span>افزودن خودکار</a>
+              <a href="incy://add/{{ .subUrl }}" class="app-chip add" onclick="showToast(t('openingApp'))"><span class="app-icon">⚡</span><span data-i18n="autoAdd">افزودن خودکار</span></a>
             </div>
           </div>
           </div>
@@ -619,8 +641,8 @@ body.light-theme .progress-track {
       <div class="platform-accordion" id="acc-ios">
         <div class="platform-accordion-header" onclick="toggleAcc('acc-ios')">
           <span class="platform-acc-icon">📱</span>
-          <span class="platform-acc-name">آیفون</span>
-          <span class="platform-acc-count">۲ نرم‌افزار</span>
+          <span class="platform-acc-name" data-i18n="iphone">آیفون</span>
+          <span class="platform-acc-count" data-i18n="apps2">۲ نرم‌افزار</span>
           <span class="platform-acc-chevron">▼</span>
         </div>
         <div class="platform-accordion-body">
@@ -629,14 +651,14 @@ body.light-theme .progress-track {
             <div class="app-row-head"><span class="app-icon">🔰</span>Happ</div>
             <div class="app-row-actions">
               <a href="https://apps.apple.com/us/app/happ-proxy-utility/id6504287215" class="app-chip" target="_blank" rel="noopener"><span class="app-icon">🍎</span>App Store</a>
-              <a href="happ://add/{{ .subUrl }}" class="app-chip add" onclick="showToast('در حال باز کردن اپ…')"><span class="app-icon">⚡</span>افزودن خودکار</a>
+              <a href="happ://add/{{ .subUrl }}" class="app-chip add" onclick="showToast(t('openingApp'))"><span class="app-icon">⚡</span><span data-i18n="autoAdd">افزودن خودکار</span></a>
             </div>
           </div>
           <div class="app-row">
             <div class="app-row-head"><span class="app-icon">💎</span>Incy</div>
             <div class="app-row-actions">
               <a href="https://apps.apple.com/app/incy/id6756943388" class="app-chip" target="_blank" rel="noopener"><span class="app-icon">🍎</span>App Store</a>
-              <a href="incy://add/{{ .subUrl }}" class="app-chip add" onclick="showToast('در حال باز کردن اپ…')"><span class="app-icon">⚡</span>افزودن خودکار</a>
+              <a href="incy://add/{{ .subUrl }}" class="app-chip add" onclick="showToast(t('openingApp'))"><span class="app-icon">⚡</span><span data-i18n="autoAdd">افزودن خودکار</span></a>
             </div>
           </div>
           </div>
@@ -647,7 +669,7 @@ body.light-theme .progress-track {
         <div class="platform-accordion-header" onclick="toggleAcc('acc-tv')">
           <span class="platform-acc-icon">📺</span>
           <span class="platform-acc-name">Android TV</span>
-          <span class="platform-acc-count">۲ نرم‌افزار</span>
+          <span class="platform-acc-count" data-i18n="apps2">۲ نرم‌افزار</span>
           <span class="platform-acc-chevron">▼</span>
         </div>
         <div class="platform-accordion-body">
@@ -674,13 +696,13 @@ body.light-theme .progress-track {
   <!-- SUPPORT -->
   <section class="section reveal" style="transition-delay:.3s">
     <div class="glass support-card">
-      <div class="section-title">پشتیبانی</div>
+      <div class="section-title" data-i18n="secSupport">پشتیبانی</div>
       <div class="support-inner">
         <div class="support-icon-wrap">💬</div>
-        <p class="support-text">در صورت بروز هرگونه مشکل، تیم پشتیبانی در کنار شماست.</p>
+        <p class="support-text" data-i18n="supportText">در صورت بروز هرگونه مشکل، تیم پشتیبانی در کنار شماست.</p>
         <a href="{{ .subSupportUrl }}" class="support-btn" target="_blank">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 1.93.46 3.75 1.27 5.37L0 24l6.84-1.27A11.95 11.95 0 0 0 12 24c6.63 0 12-5.37 12-12S18.63 0 12 0zm6 16.5c-.26.7-1.32 1.3-1.82 1.37-.47.07-1.07.1-1.72-.11-.4-.13-.9-.3-1.56-.58-2.73-1.18-4.52-3.95-4.66-4.14-.13-.18-1.1-1.47-1.1-2.8 0-1.33.7-1.98 1-2.28.28-.3.6-.38.8-.38.2 0 .4.01.58.02.18.01.43-.07.67.51.26.6.88 2.15.96 2.3.08.16.13.35.03.56-.1.2-.16.32-.3.5-.14.17-.3.38-.43.51-.14.14-.28.3-.12.57.16.27.72 1.18 1.55 1.9 1.07.95 1.96 1.25 2.23 1.38.27.14.43.12.59-.07.16-.19.68-.8.87-1.07.18-.27.36-.22.6-.13.25.09 1.58.74 1.85.88.27.13.46.2.52.3.07.1.07.58-.18 1.27z"/></svg>
-          ارتباط با پشتیبانی
+          <span data-i18n="contactSupport">ارتباط با پشتیبانی</span>
         </a>
       </div>
     </div>
@@ -690,16 +712,333 @@ body.light-theme .progress-track {
   <footer class="footer reveal" style="transition-delay:.35s">
     <div class="footer-divider"></div>
     <div class="footer-badges">
-      <div class="footer-badge">🔒 سرویس امن و رمزنگاری‌شده</div>
-      <div class="footer-badge">🌐 پروتکل‌های استاندارد</div>
-      <div class="footer-badge">⚡ اتصال پرسرعت</div>
+      <div class="footer-badge">🔒 <span data-i18n="badgeSecure">سرویس امن و رمزنگاری‌شده</span></div>
+      <div class="footer-badge">🌐 <span data-i18n="badgeProto">پروتکل‌های استاندارد</span></div>
+      <div class="footer-badge">⚡ <span data-i18n="badgeFast">اتصال پرسرعت</span></div>
     </div>
     <div class="footer-brand">{{ .subTitle }}</div>
-    <div class="footer-copy">© {{ .subTitle }} — تمامی حقوق محفوظ است</div>
+    <div class="footer-copy">© {{ .subTitle }} — <span data-i18n="rights">تمامی حقوق محفوظ است</span></div>
     <div class="footer-powered">Powered by <span>3x-ui</span></div>
   </footer>
 
 </div>
+
+<script>
+/* ═══════════════════════════════════
+   I18N — fa / tr / ar / ru / en
+═══════════════════════════════════ */
+var LANGS = {
+  fa: { label: 'فارسی',   dir: 'rtl', code: 'fa' },
+  tr: { label: 'Türkçe',  dir: 'ltr', code: 'tr' },
+  ar: { label: 'العربية', dir: 'rtl', code: 'ar' },
+  ru: { label: 'Русский', dir: 'ltr', code: 'ru' },
+  en: { label: 'English', dir: 'ltr', code: 'en' }
+};
+
+var I18N = {
+  fa: {
+    pageTitle: 'پنل اشتراک',
+    themeAria: 'تغییر تم', langAria: 'تغییر زبان',
+    heroTitle: 'مدیریت اشتراک و اطلاعات', heroHighlight: 'اتصال',
+    heroSub: 'اتصال سریع، پایدار و امن',
+    secInfo: 'اطلاعات اشتراک', trafficUsage: 'مصرف ترافیک',
+    liveStatus: 'وضعیت لحظه\u200cای اشتراک شما',
+    renewSupport: 'تمدید / پشتیبانی',
+    username: 'نام کاربری',
+    remained: 'باقی\u200cمانده', used: 'مصرف\u200cشده', download: 'دانلود', upload: 'آپلود',
+    usageOf: 'میزان مصرف از حجم کل',
+    expireDate: 'تاریخ انقضا', lastOnline: 'آخرین اتصال', online: 'آنلاین',
+    secActions: 'عملیات سریع',
+    copySub: 'کپی لینک اشتراک', copyClash: 'کپی لینک Clash', copyJson: 'کپی لینک JSON',
+    secQr: 'QR Code اشتراک', qrSub: 'برای اتصال سریع اسکن کنید',
+    qrHint: 'با هر اپلیکیشن پشتیبانی\u200cکننده اسکن کنید',
+    secConfigs: 'لیست کانفیگ\u200cها',
+    titleCopy: 'کپی', titleQr: 'QR', titleOpen: 'باز',
+    secApps: 'دانلود نرم\u200cافزارها',
+    android: 'اندروید', windows: 'ویندوز', mac: 'مک', iphone: 'آیفون',
+    apps2: '۲ نرم\u200cافزار',
+    dlApk: 'دانلود APK', dlWin: 'دانلود نسخه ویندوز', dlDmg: 'دانلود DMG',
+    autoAdd: 'افزودن خودکار', openingApp: 'در حال باز کردن اپ…',
+    secSupport: 'پشتیبانی',
+    supportText: 'در صورت بروز هرگونه مشکل، تیم پشتیبانی در کنار شماست.',
+    contactSupport: 'ارتباط با پشتیبانی',
+    badgeSecure: 'سرویس امن و رمزنگاری\u200cشده', badgeProto: 'پروتکل\u200cهای استاندارد', badgeFast: 'اتصال پرسرعت',
+    rights: 'تمامی حقوق محفوظ است',
+    qrModalTitle: 'اسکن QR Code', close: 'بستن',
+    toastNoLink: 'لینک موجود نیست', copied: 'کپی شد ✓',
+    toastCopySub: 'لینک اشتراک کپی شد', toastCopyClash: 'لینک Clash کپی شد',
+    toastCopyJson: 'لینک JSON کپی شد', toastCopyCfg: 'کانفیگ کپی شد',
+    qrFail: 'QR Code بارگذاری نشد',
+    unlimited: 'نامحدود', fromFirstUse: 'از اولین اتصال',
+    expiredWord: 'منقضی شده', expiresToday: 'امروز منقضی می\u200cشود', daysLeft: '{n} روز مانده',
+    nowOnline: 'همین حالا', neverConnected: 'هنوز متصل نشده',
+    stActive: 'سرویس فعال', stExpiredNoData: 'منقضی و بدون حجم', stNoData: 'حجم تمام شده',
+    stDisabled: 'قطع شده توسط پشتیبان', stLow: 'رو به اتمام',
+    msgExpiredNoData: 'دلیل غیرفعال بودن: مدت اشتراک شما به پایان رسیده و حجم آن هم تمام شده است. برای تمدید با پشتیبانی در ارتباط باشید.',
+    msgExpired: 'دلیل غیرفعال بودن: مدت اشتراک شما به پایان رسیده است. برای تمدید با پشتیبانی در ارتباط باشید.',
+    msgNoData: 'دلیل غیرفعال بودن: حجم اشتراک شما تمام شده است. برای تمدید یا خرید حجم جدید با پشتیبانی در ارتباط باشید.',
+    msgDisabled: 'دلیل غیرفعال بودن: این اشتراک توسط پشتیبانی قطع شده است. برای فعال\u200cسازی با پشتیبانی در ارتباط باشید.',
+    msgLowBoth: 'حجم و زمان اشتراک شما رو به پایان است. بهتر است زودتر تمدید کنید.',
+    msgLowData: 'کمتر از ۱۰٪ حجم اشتراک شما باقی مانده است. بهتر است زودتر تمدید کنید.',
+    msgLowTime: 'کمتر از ۳ روز تا پایان اشتراک شما باقی مانده است. بهتر است زودتر تمدید کنید.'
+  },
+  tr: {
+    pageTitle: 'Abonelik Paneli',
+    themeAria: 'Temayı değiştir', langAria: 'Dili değiştir',
+    heroTitle: 'Abonelik Yönetimi ve', heroHighlight: 'Bağlantı Bilgileri',
+    heroSub: 'Hızlı, kararlı ve güvenli bağlantı',
+    secInfo: 'Abonelik Bilgileri', trafficUsage: 'Trafik Kullanımı',
+    liveStatus: 'Aboneliğinizin anlık durumu',
+    renewSupport: 'Yenile / Destek',
+    username: 'Kullanıcı adı',
+    remained: 'Kalan', used: 'Kullanılan', download: 'İndirme', upload: 'Yükleme',
+    usageOf: 'Toplam hacimden kullanım',
+    expireDate: 'Bitiş tarihi', lastOnline: 'Son bağlantı', online: 'Çevrimiçi',
+    secActions: 'Hızlı İşlemler',
+    copySub: 'Abonelik bağlantısını kopyala', copyClash: 'Clash bağlantısını kopyala', copyJson: 'JSON bağlantısını kopyala',
+    secQr: 'Abonelik QR Kodu', qrSub: 'Hızlı bağlantı için tarayın',
+    qrHint: 'Desteklenen herhangi bir uygulamayla tarayın',
+    secConfigs: 'Yapılandırma Listesi',
+    titleCopy: 'Kopyala', titleQr: 'QR', titleOpen: 'Aç',
+    secApps: 'Uygulamaları İndir',
+    android: 'Android', windows: 'Windows', mac: 'Mac', iphone: 'iPhone',
+    apps2: '2 uygulama',
+    dlApk: 'APK indir', dlWin: 'Windows sürümünü indir', dlDmg: 'DMG indir',
+    autoAdd: 'Otomatik ekle', openingApp: 'Uygulama açılıyor…',
+    secSupport: 'Destek',
+    supportText: 'Herhangi bir sorun yaşarsanız destek ekibimiz yanınızda.',
+    contactSupport: 'Destekle iletişime geç',
+    badgeSecure: 'Güvenli ve şifreli hizmet', badgeProto: 'Standart protokoller', badgeFast: 'Yüksek hızlı bağlantı',
+    rights: 'Tüm hakları saklıdır',
+    qrModalTitle: 'QR Kodu Tara', close: 'Kapat',
+    toastNoLink: 'Bağlantı mevcut değil', copied: 'Kopyalandı ✓',
+    toastCopySub: 'Abonelik bağlantısı kopyalandı', toastCopyClash: 'Clash bağlantısı kopyalandı',
+    toastCopyJson: 'JSON bağlantısı kopyalandı', toastCopyCfg: 'Yapılandırma kopyalandı',
+    qrFail: 'QR Kodu yüklenemedi',
+    unlimited: 'Sınırsız', fromFirstUse: 'İlk bağlantıdan itibaren',
+    expiredWord: 'Süresi doldu', expiresToday: 'Bugün sona eriyor', daysLeft: '{n} gün kaldı',
+    nowOnline: 'Şu anda', neverConnected: 'Henüz bağlanmadı',
+    stActive: 'Hizmet aktif', stExpiredNoData: 'Süresi doldu, veri bitti', stNoData: 'Veri bitti',
+    stDisabled: 'Destek tarafından devre dışı bırakıldı', stLow: 'Bitmek üzere',
+    msgExpiredNoData: 'Devre dışı olma nedeni: Aboneliğinizin süresi doldu ve veriniz de bitti. Yenilemek için destekle iletişime geçin.',
+    msgExpired: 'Devre dışı olma nedeni: Aboneliğinizin süresi doldu. Yenilemek için destekle iletişime geçin.',
+    msgNoData: 'Devre dışı olma nedeni: Aboneliğinizin verisi bitti. Yenilemek veya yeni hacim satın almak için destekle iletişime geçin.',
+    msgDisabled: 'Devre dışı olma nedeni: Bu abonelik destek ekibi tarafından devre dışı bırakıldı. Etkinleştirmek için destekle iletişime geçin.',
+    msgLowBoth: 'Aboneliğinizin hacmi ve süresi bitmek üzere. Daha erken yenilemeniz önerilir.',
+    msgLowData: 'Aboneliğinizin hacminin %10’undan azı kaldı. Daha erken yenilemeniz önerilir.',
+    msgLowTime: 'Aboneliğinizin bitmesine 3 günden az kaldı. Daha erken yenilemeniz önerilir.'
+  },
+  ar: {
+    pageTitle: 'لوحة الاشتراك',
+    themeAria: 'تغيير السمة', langAria: 'تغيير اللغة',
+    heroTitle: 'إدارة الاشتراك ومعلومات', heroHighlight: 'الاتصال',
+    heroSub: 'اتصال سريع ومستقر وآمن',
+    secInfo: 'معلومات الاشتراك', trafficUsage: 'استهلاك البيانات',
+    liveStatus: 'الحالة اللحظية لاشتراكك',
+    renewSupport: 'التجديد / الدعم',
+    username: 'اسم المستخدم',
+    remained: 'المتبقي', used: 'المستهلك', download: 'التنزيل', upload: 'الرفع',
+    usageOf: 'الاستهلاك من الحجم الكلي',
+    expireDate: 'تاريخ الانتهاء', lastOnline: 'آخر اتصال', online: 'متصل',
+    secActions: 'إجراءات سريعة',
+    copySub: 'نسخ رابط الاشتراك', copyClash: 'نسخ رابط Clash', copyJson: 'نسخ رابط JSON',
+    secQr: 'رمز QR للاشتراك', qrSub: 'امسح الرمز للاتصال السريع',
+    qrHint: 'امسحه بأي تطبيق مدعوم',
+    secConfigs: 'قائمة الإعدادات',
+    titleCopy: 'نسخ', titleQr: 'QR', titleOpen: 'فتح',
+    secApps: 'تنزيل التطبيقات',
+    android: 'أندرويد', windows: 'ويندوز', mac: 'ماك', iphone: 'آيفون',
+    apps2: 'تطبيقان',
+    dlApk: 'تنزيل APK', dlWin: 'تنزيل نسخة ويندوز', dlDmg: 'تنزيل DMG',
+    autoAdd: 'إضافة تلقائية', openingApp: 'جارٍ فتح التطبيق…',
+    secSupport: 'الدعم',
+    supportText: 'في حال واجهت أي مشكلة، فريق الدعم معك.',
+    contactSupport: 'التواصل مع الدعم',
+    badgeSecure: 'خدمة آمنة ومشفّرة', badgeProto: 'بروتوكولات قياسية', badgeFast: 'اتصال عالي السرعة',
+    rights: 'جميع الحقوق محفوظة',
+    qrModalTitle: 'مسح رمز QR', close: 'إغلاق',
+    toastNoLink: 'الرابط غير متوفر', copied: 'تم النسخ ✓',
+    toastCopySub: 'تم نسخ رابط الاشتراك', toastCopyClash: 'تم نسخ رابط Clash',
+    toastCopyJson: 'تم نسخ رابط JSON', toastCopyCfg: 'تم نسخ الإعداد',
+    qrFail: 'تعذّر تحميل رمز QR',
+    unlimited: 'غير محدود', fromFirstUse: 'من أول اتصال',
+    expiredWord: 'منتهي', expiresToday: 'ينتهي اليوم', daysLeft: 'متبقي {n} يوم',
+    nowOnline: 'الآن', neverConnected: 'لم يتصل بعد',
+    stActive: 'الخدمة فعّالة', stExpiredNoData: 'منتهي ونفد الحجم', stNoData: 'نفد الحجم',
+    stDisabled: 'تم إيقافه من قبل الدعم', stLow: 'على وشك الانتهاء',
+    msgExpiredNoData: 'سبب التعطيل: انتهت مدة اشتراكك ونفد الحجم أيضًا. تواصل مع الدعم للتجديد.',
+    msgExpired: 'سبب التعطيل: انتهت مدة اشتراكك. تواصل مع الدعم للتجديد.',
+    msgNoData: 'سبب التعطيل: نفد حجم اشتراكك. تواصل مع الدعم للتجديد أو شراء حجم جديد.',
+    msgDisabled: 'سبب التعطيل: تم إيقاف هذا الاشتراك من قبل الدعم. تواصل مع الدعم لإعادة التفعيل.',
+    msgLowBoth: 'حجم اشتراكك ومدته على وشك الانتهاء. يُفضّل التجديد مبكرًا.',
+    msgLowData: 'تبقّى أقل من 10٪ من حجم اشتراكك. يُفضّل التجديد مبكرًا.',
+    msgLowTime: 'تبقّى أقل من 3 أيام على انتهاء اشتراكك. يُفضّل التجديد مبكرًا.'
+  },
+  ru: {
+    pageTitle: 'Панель подписки',
+    themeAria: 'Сменить тему', langAria: 'Сменить язык',
+    heroTitle: 'Управление подпиской и данными', heroHighlight: 'подключения',
+    heroSub: 'Быстрое, стабильное и безопасное подключение',
+    secInfo: 'Информация о подписке', trafficUsage: 'Использование трафика',
+    liveStatus: 'Текущее состояние вашей подписки',
+    renewSupport: 'Продлить / Поддержка',
+    username: 'Имя пользователя',
+    remained: 'Осталось', used: 'Использовано', download: 'Загрузка', upload: 'Отдача',
+    usageOf: 'Использование от общего объёма',
+    expireDate: 'Дата окончания', lastOnline: 'Последнее подключение', online: 'Онлайн',
+    secActions: 'Быстрые действия',
+    copySub: 'Скопировать ссылку подписки', copyClash: 'Скопировать ссылку Clash', copyJson: 'Скопировать ссылку JSON',
+    secQr: 'QR-код подписки', qrSub: 'Отсканируйте для быстрого подключения',
+    qrHint: 'Сканируйте любым поддерживаемым приложением',
+    secConfigs: 'Список конфигураций',
+    titleCopy: 'Копировать', titleQr: 'QR', titleOpen: 'Открыть',
+    secApps: 'Скачать приложения',
+    android: 'Android', windows: 'Windows', mac: 'Mac', iphone: 'iPhone',
+    apps2: '2 приложения',
+    dlApk: 'Скачать APK', dlWin: 'Скачать версию для Windows', dlDmg: 'Скачать DMG',
+    autoAdd: 'Добавить автоматически', openingApp: 'Открываем приложение…',
+    secSupport: 'Поддержка',
+    supportText: 'Если возникнут проблемы, наша команда поддержки рядом.',
+    contactSupport: 'Связаться с поддержкой',
+    badgeSecure: 'Безопасный и зашифрованный сервис', badgeProto: 'Стандартные протоколы', badgeFast: 'Высокоскоростное подключение',
+    rights: 'Все права защищены',
+    qrModalTitle: 'Сканировать QR-код', close: 'Закрыть',
+    toastNoLink: 'Ссылка недоступна', copied: 'Скопировано ✓',
+    toastCopySub: 'Ссылка подписки скопирована', toastCopyClash: 'Ссылка Clash скопирована',
+    toastCopyJson: 'Ссылка JSON скопирована', toastCopyCfg: 'Конфигурация скопирована',
+    qrFail: 'Не удалось загрузить QR-код',
+    unlimited: 'Безлимит', fromFirstUse: 'С первого подключения',
+    expiredWord: 'Истекла', expiresToday: 'Истекает сегодня', daysLeft: 'Осталось {n} дн.',
+    nowOnline: 'Прямо сейчас', neverConnected: 'Ещё не подключались',
+    stActive: 'Сервис активен', stExpiredNoData: 'Истёк, трафик закончился', stNoData: 'Трафик закончился',
+    stDisabled: 'Отключено поддержкой', stLow: 'Скоро закончится',
+    msgExpiredNoData: 'Причина отключения: срок подписки истёк, и трафик тоже закончился. Свяжитесь с поддержкой для продления.',
+    msgExpired: 'Причина отключения: срок вашей подписки истёк. Свяжитесь с поддержкой для продления.',
+    msgNoData: 'Причина отключения: трафик подписки закончился. Свяжитесь с поддержкой для продления или покупки нового объёма.',
+    msgDisabled: 'Причина отключения: эта подписка отключена поддержкой. Свяжитесь с поддержкой для активации.',
+    msgLowBoth: 'Трафик и срок подписки скоро закончатся. Лучше продлить заранее.',
+    msgLowData: 'Осталось менее 10% трафика. Лучше продлить заранее.',
+    msgLowTime: 'До окончания подписки осталось менее 3 дней. Лучше продлить заранее.'
+  },
+  en: {
+    pageTitle: 'Subscription Panel',
+    themeAria: 'Toggle theme', langAria: 'Change language',
+    heroTitle: 'Subscription and', heroHighlight: 'Connection Info',
+    heroSub: 'Fast, stable and secure connection',
+    secInfo: 'Subscription Info', trafficUsage: 'Traffic Usage',
+    liveStatus: 'Live status of your subscription',
+    renewSupport: 'Renew / Support',
+    username: 'Username',
+    remained: 'Remaining', used: 'Used', download: 'Download', upload: 'Upload',
+    usageOf: 'Usage of total volume',
+    expireDate: 'Expiry date', lastOnline: 'Last connection', online: 'Online',
+    secActions: 'Quick Actions',
+    copySub: 'Copy subscription link', copyClash: 'Copy Clash link', copyJson: 'Copy JSON link',
+    secQr: 'Subscription QR Code', qrSub: 'Scan for quick connection',
+    qrHint: 'Scan with any supported app',
+    secConfigs: 'Config List',
+    titleCopy: 'Copy', titleQr: 'QR', titleOpen: 'Open',
+    secApps: 'Download Apps',
+    android: 'Android', windows: 'Windows', mac: 'Mac', iphone: 'iPhone',
+    apps2: '2 apps',
+    dlApk: 'Download APK', dlWin: 'Download for Windows', dlDmg: 'Download DMG',
+    autoAdd: 'Auto add', openingApp: 'Opening app…',
+    secSupport: 'Support',
+    supportText: 'If you run into any problem, our support team is here for you.',
+    contactSupport: 'Contact support',
+    badgeSecure: 'Secure, encrypted service', badgeProto: 'Standard protocols', badgeFast: 'High-speed connection',
+    rights: 'All rights reserved',
+    qrModalTitle: 'Scan QR Code', close: 'Close',
+    toastNoLink: 'Link not available', copied: 'Copied ✓',
+    toastCopySub: 'Subscription link copied', toastCopyClash: 'Clash link copied',
+    toastCopyJson: 'JSON link copied', toastCopyCfg: 'Config copied',
+    qrFail: 'QR code failed to load',
+    unlimited: 'Unlimited', fromFirstUse: 'From first connection',
+    expiredWord: 'Expired', expiresToday: 'Expires today', daysLeft: '{n} days left',
+    nowOnline: 'Right now', neverConnected: 'Never connected',
+    stActive: 'Service active', stExpiredNoData: 'Expired and out of data', stNoData: 'Out of data',
+    stDisabled: 'Disabled by support', stLow: 'Running low',
+    msgExpiredNoData: 'Reason for deactivation: your subscription has expired and your data is used up. Contact support to renew.',
+    msgExpired: 'Reason for deactivation: your subscription has expired. Contact support to renew.',
+    msgNoData: 'Reason for deactivation: your data allowance is used up. Contact support to renew or buy more data.',
+    msgDisabled: 'Reason for deactivation: this subscription was disabled by support. Contact support to reactivate it.',
+    msgLowBoth: 'Your data and time are almost used up. It is best to renew soon.',
+    msgLowData: 'Less than 10% of your data remains. It is best to renew soon.',
+    msgLowTime: 'Less than 3 days remain until your subscription ends. It is best to renew soon.'
+  }
+};
+
+var curLang = 'fa';
+try {
+  var savedLang = localStorage.getItem('lang');
+  if (savedLang && LANGS[savedLang]) curLang = savedLang;
+} catch (e) {}
+
+/* t('key') or t('key', {n: 5}) */
+function t(key, vars) {
+  var d = I18N[curLang] || I18N.fa;
+  var s = (d[key] !== undefined) ? d[key] : (I18N.fa[key] !== undefined ? I18N.fa[key] : key);
+  if (vars) for (var k in vars) s = s.split('{' + k + '}').join(vars[k]);
+  return s;
+}
+
+function applyLang(lang, persist) {
+  if (!LANGS[lang]) lang = 'fa';
+  curLang = lang;
+  var meta = LANGS[lang];
+  document.documentElement.lang = meta.code;
+  document.documentElement.dir = meta.dir;
+  if (persist) { try { localStorage.setItem('lang', lang); } catch (e) {} }
+
+  document.querySelectorAll('[data-i18n]').forEach(function (el) {
+    el.textContent = t(el.getAttribute('data-i18n'));
+  });
+  document.querySelectorAll('[data-i18n-title]').forEach(function (el) {
+    el.title = t(el.getAttribute('data-i18n-title'));
+  });
+  document.querySelectorAll('[data-i18n-aria]').forEach(function (el) {
+    el.setAttribute('aria-label', t(el.getAttribute('data-i18n-aria')));
+  });
+  document.querySelectorAll('.lang-item').forEach(function (b) {
+    b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+  });
+
+  var brand = document.querySelector('.hero-brand');
+  document.title = (brand ? brand.textContent.trim() : '') + ' — ' + t('pageTitle');
+
+  if (typeof window.__refreshDynamic === 'function') window.__refreshDynamic();
+}
+
+function closeLangMenu() {
+  var m = document.getElementById('lang-menu');
+  var b = document.getElementById('lang-toggle');
+  if (m) m.classList.remove('show');
+  if (b) b.setAttribute('aria-expanded', 'false');
+}
+function toggleLangMenu(e) {
+  if (e) e.stopPropagation();
+  var m = document.getElementById('lang-menu');
+  var b = document.getElementById('lang-toggle');
+  if (!m) return;
+  var open = m.classList.toggle('show');
+  if (b) b.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+function selectLang(lang) {
+  applyLang(lang, true);
+  closeLangMenu();
+}
+document.addEventListener('click', function (e) {
+  var w = document.getElementById('lang-wrap');
+  if (w && !w.contains(e.target)) closeLangMenu();
+});
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') closeLangMenu();
+});
+
+/* apply immediately (script sits at the end of <body>, DOM is ready) */
+applyLang(curLang, false);
+
+</script>
 
 <script>
 /* ═══════════════════════════════════
@@ -734,13 +1073,20 @@ function toJalali(unixSec) {
   return j[0]+'/'+p(j[1])+'/'+p(j[2])+'،  '+p(hh)+':'+p(mi)+':'+p(ss);
 }
 
+function fmtDate(unixSec) {
+  if (curLang === 'fa') return toJalali(unixSec);
+  var d = new Date(unixSec * 1000);
+  var p = function(n){ return n < 10 ? '0'+n : ''+n; };
+  return '\u200E' + d.getFullYear()+'/'+p(d.getMonth()+1)+'/'+p(d.getDate())+', '+p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds());
+}
+
 function daysLeft(unixSec) {
   var now=Math.floor(Date.now()/1000);
   var diff=unixSec-now;
-  if(diff<=0) return 'منقضی شده';
+  if(diff<=0) return t('expiredWord');
   var d=Math.floor(diff/86400);
-  if(d===0) return 'امروز منقضی می‌شود';
-  return d+' روز مانده';
+  if(d===0) return t('expiresToday');
+  return t('daysLeft',{n:d});
 }
 
 /* ═══════════════════════════════════
@@ -749,28 +1095,30 @@ function daysLeft(unixSec) {
 window.addEventListener('DOMContentLoaded', function() {
 
   /* --- RENDER HELPERS (used on load and by live polling) --- */
+  var lastOnlineState={ms:0,online:false};
   function setText(id, v){ var el=document.getElementById(id); if(el && v!==undefined && v!==null) el.textContent=v; }
 
   function renderExpire(ts){
     var expEl=document.getElementById('expire-shamsi');
     var cdEl=document.getElementById('expire-countdown');
     if(!expEl) return;
-    if(!ts){ expEl.textContent='نامحدود'; if(cdEl) cdEl.textContent=''; return; }
-    if(ts<0){ expEl.textContent='از اولین اتصال'; if(cdEl) cdEl.textContent=''; return; }
-    expEl.textContent=toJalali(ts);
+    if(!ts){ expEl.textContent=t('unlimited'); if(cdEl) cdEl.textContent=''; return; }
+    if(ts<0){ expEl.textContent=t('fromFirstUse'); if(cdEl) cdEl.textContent=''; return; }
+    expEl.textContent=fmtDate(ts);
     if(cdEl) cdEl.textContent=daysLeft(ts);
   }
 
   function renderLastOnline(ms, online){
+    lastOnlineState={ms:ms,online:online};
     var el=document.getElementById('lastonline-val');
     var badge=document.getElementById('lastonline-badge');
     if(!el) return;
     if(online){
-      el.textContent='همین حالا';
+      el.textContent=t('nowOnline');
       if(badge) badge.style.display='';
     } else {
       if(badge) badge.style.display='none';
-      el.textContent = ms>0 ? toJalali(ms/1000) : 'هنوز متصل نشده';
+      el.textContent = ms>0 ? fmtDate(ms/1000) : t('neverConnected');
     }
   }
 
@@ -781,7 +1129,7 @@ window.addEventListener('DOMContentLoaded', function() {
     var pct=totB>0?Math.min(100,Math.round(usedB/totB*100)):0;
     fill.style.width=pct+'%';
     fill.style.background='';
-    if(pctEl){ pctEl.textContent=totB>0?pct+'%':'نامحدود'; pctEl.style.color=''; }
+    if(pctEl){ pctEl.textContent=totB>0?pct+'%':t('unlimited'); pctEl.style.color=''; }
     if(totB>0&&pct>=90){fill.style.background='linear-gradient(90deg,#DC2626,#EF4444)';if(pctEl)pctEl.style.color='#EF4444';}
     else if(totB>0&&pct>=70){fill.style.background='linear-gradient(90deg,#D97706,#F59E0B)';if(pctEl)pctEl.style.color='#F59E0B';}
   }
@@ -794,28 +1142,17 @@ window.addEventListener('DOMContentLoaded', function() {
     var exhausted = c.totB>0 && c.usedB>=c.totB;
     var lowData   = c.totB>0 && c.usedB/c.totB>=0.9;
     var lowTime   = c.expire>0 && !expired && (c.expire-now)<=3*86400;
-    var cls='active', txt='سرویس فعال', msg='', kind='', icon='⚠️';
+    var cls='active', txt=t('stActive'), msg='', kind='', icon='⚠️';
     if(!c.enabled || expired || exhausted){
       cls='inactive'; kind='bad';
-      if(expired && exhausted){
-        txt='منقضی و بدون حجم'; icon='⌛';
-        msg='دلیل غیرفعال بودن: مدت اشتراک شما به پایان رسیده و حجم آن هم تمام شده است. برای تمدید با پشتیبانی در ارتباط باشید.';
-      } else if(expired){
-        txt='منقضی شده'; icon='⌛';
-        msg='دلیل غیرفعال بودن: مدت اشتراک شما به پایان رسیده است. برای تمدید با پشتیبانی در ارتباط باشید.';
-      } else if(exhausted){
-        txt='حجم تمام شده'; icon='📉';
-        msg='دلیل غیرفعال بودن: حجم اشتراک شما تمام شده است. برای تمدید یا خرید حجم جدید با پشتیبانی در ارتباط باشید.';
-      } else {
-        txt='قطع شده توسط پشتیبان'; icon='⛔';
-        msg='دلیل غیرفعال بودن: این اشتراک توسط پشتیبانی قطع شده است. برای فعال‌سازی با پشتیبانی در ارتباط باشید.';
-      }
+      if(expired && exhausted){ txt=t('stExpiredNoData'); icon='⌛'; msg=t('msgExpiredNoData'); }
+      else if(expired){ txt=t('expiredWord'); icon='⌛'; msg=t('msgExpired'); }
+      else if(exhausted){ txt=t('stNoData'); icon='📉'; msg=t('msgNoData'); }
+      else { txt=t('stDisabled'); icon='⛔'; msg=t('msgDisabled'); }
     }
     else if(lowData || lowTime){
-      cls='warn'; txt='رو به اتمام'; kind='warn';
-      msg = (lowData&&lowTime) ? 'حجم و زمان اشتراک شما رو به پایان است. بهتر است زودتر تمدید کنید.'
-          : lowData ? 'کمتر از ۱۰٪ حجم اشتراک شما باقی مانده است. بهتر است زودتر تمدید کنید.'
-          : 'کمتر از ۳ روز تا پایان اشتراک شما باقی مانده است. بهتر است زودتر تمدید کنید.';
+      cls='warn'; txt=t('stLow'); kind='warn';
+      msg = (lowData&&lowTime) ? t('msgLowBoth') : lowData ? t('msgLowData') : t('msgLowTime');
     }
     b.className='status-badge '+cls;
     b.innerHTML='<span class="status-dot"></span>'+txt;
@@ -883,6 +1220,14 @@ window.addEventListener('DOMContentLoaded', function() {
   setInterval(pollInfo,10000);
   document.addEventListener('visibilitychange',function(){ if(!document.hidden) pollInfo(); });
 
+  /* --- re-render dynamic texts when language changes --- */
+  window.__refreshDynamic=function(){
+    renderStatus(cur);
+    renderExpire(cur.expire);
+    renderLastOnline(lastOnlineState.ms,lastOnlineState.online);
+    renderProgress(cur.usedB,cur.totB);
+  };
+
   /* --- CONFIG names --- */
   document.querySelectorAll('.config-item').forEach(function(item){
     var link=item.dataset.link||'';
@@ -938,8 +1283,8 @@ function showToast(msg,type){
    COPY
 ═══════════════════════════════════ */
 function copyLink(url,label,btn) {
-  if(!url) return showToast('لینک موجود نیست','error');
-  var doRipple=function(){if(btn)rippleEffect(btn,null);showToast(label||'کپی شد ✓');};
+  if(!url) return showToast(t('toastNoLink'),'error');
+  var doRipple=function(){if(btn)rippleEffect(btn,null);showToast(t(label||'copied'));};
   if(navigator.clipboard&&navigator.clipboard.writeText){
     navigator.clipboard.writeText(url).then(doRipple).catch(function(){fallbackCopy(url,doRipple);});
   } else { fallbackCopy(url,doRipple); }
@@ -993,7 +1338,7 @@ function toggleAcc(id){
 ═══════════════════════════════════ */
 function showQrModal(url){
   var box=document.getElementById('modal-qr-box');
-  if(!window.QRCode) return showToast('QR Code بارگذاری نشد','error');
+  if(!window.QRCode) return showToast(t('qrFail'),'error');
   box.innerHTML='';
   new QRCode(box,{text:url,width:220,height:220,colorDark:'#000000',colorLight:'#FFFFFF',correctLevel:QRCode.CorrectLevel.M});
   document.getElementById('qr-modal').classList.add('show');
